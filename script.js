@@ -41,15 +41,21 @@ const salgados = [
 const bebidas = [
     {
         nome: "Coca-Cola Lata",
-        descricao: "Geladinha. 350ml.",
-        preco: "R$ 5,00",
+        descricao: "Coca orig. 350ml.",
+        preco: "R$ 6,00",
         imagem: "imagens/coca-cola.jpg"
     },
     {
-        nome: "Refrigerante guaraná",
-        descricao: "Latinha de guaraná. 350ml.",
+        nome: "Refrigerante Guaraná",
+        descricao: "Guaraná Antártica orig. 350ml.",
         preco: "R$ 6,00",
         imagem: "imagens/guarana.jpeg"
+    },
+    {
+        nome: "Coca-Cola Lata Zero",
+        descricao: "Coca zero 350ml.",
+        preco: "R$ 6,00",
+        imagem: "imagens/coca-zero.jpeg"
     }
 ];
 
