@@ -43,19 +43,31 @@ const bebidas = [
         nome: "Coca-Cola Lata",
         descricao: "Coca orig. 350ml.",
         preco: "R$ 6,00",
-        imagem: "imagens/coca-cola.jpg"
-    },
-    {
-        nome: "Refrigerante Guaraná",
-        descricao: "Guaraná Antártica orig. 350ml.",
-        preco: "R$ 6,00",
-        imagem: "imagens/guarana.jpeg"
+        imagem: "imagens/coca.png"
     },
     {
         nome: "Coca-Cola Lata Zero",
         descricao: "Coca zero 350ml.",
         preco: "R$ 6,00",
-        imagem: "imagens/coca-zero.jpeg"
+        imagem: "imagens/coca-zero.png"
+    },
+    {
+        nome: "Refrigerante Guaraná",
+        descricao: "Guaraná Antártica orig. 350ml.",
+        preco: "R$ 6,00",
+        imagem: "imagens/guarana.png"
+    },
+    {
+        nome: "Refrigerante Guaraná Zero",
+        descricao: "Guaraná Antártica zero. 350ml.",
+        preco: "R$ 6,00",
+        imagem: "imagens/guarana-zero.png"
+    },
+    {
+        nome: "Pepsi Lata",
+        descricao: "Pepsi orig. 350ml",
+        preco: "R$ 6,00",
+        imagem: "imagens/pepsi.png"
     }
 ];
 
