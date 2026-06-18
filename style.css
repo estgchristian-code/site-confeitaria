@@ -1,0 +1,154 @@
+/* O asterisco (*) significa "Reset": aplica as regras a absolutamente TODOS os elementos da página */
+* {
+    margin: 0;              /* Remove as margens padrão que os navegadores colocam sozinhos */
+    padding: 0;             /* Remove o espaçamento interno padrão de todos os elementos */
+    box-sizing: border-box; /* O "pulo do gato": faz com que o padding e a borda não aumentem o tamanho total do elemento */
+    font-family: 'Segoe UI', sans-serif; /* Define a fonte padrão do site (Segoe UI se houver no PC, se não, usa sans-serif) */
+}
+
+/* Regras para o corpo/fundo de toda a página */
+body {
+    background-color: rgb(240, 222, 203); /* Define a cor de fundo do site */
+    color: #4a4a4a;                       /* Define a cor padrão de todos os textos como um cinza escuro elegante */
+}
+
+/* Regras para o cabeçalho (o topo do seu site) */
+header {
+    background-color: #4A2511; /* Define o fundo marrom escuro da sua marca */
+    text-align: center;                  /* Centraliza todos os textos (h1 e p) que estão dentro do cabeçalho */
+    padding: 30px 15px;                  /* Cria um espaço de 30px em cima/baixo e 15px nas laterais para o cabeçalho respirar */
+    border-bottom-left-radius: 20px;     /* Arredonda o canto inferior esquerdo do cabeçalho */
+    border-bottom-right-radius: 20px;    /* Arredonda o canto inferior direito do cabeçalho */
+}
+
+/* Regras específicas para o título principal (Nome da Confeitaria) dentro do cabeçalho */
+header h1 {
+    color: rgb(221, 115, 115); /* Define a cor do título como o tom rosa/marrom */
+    font-size: 1.8rem;       /* Define o tamanho da fonte do título principal */
+    margin-bottom: 5px;      /* Cria uma margem de 5px embaixo do título para desgrudar do slogan */
+}
+
+/* Regras específicas para o parágrafo (slogan ou descrição) dentro do cabeçalho */
+header p {
+    color: white;         /* Define a cor do texto do slogan como branco */
+    font-size: 0.9rem;    /* Deixa o tamanho da fonte do slogan um pouco menor que o padrão */
+    font-style: italic;   /* Deixa o texto em itálico (inclinado) */
+}
+
+/* Centraliza o conteúdo na tela do computador para simular o tamanho de um celular */
+main {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Títulos das Categorias (Doces e bolos, Salgados, Bebidas) */
+h2 {
+    color: #4a2c11;
+    border-bottom: 2px solid #cfb095;
+    padding-bottom: 5px;
+    margin-top: 30px;
+    font-size: 1.4rem;
+}
+
+/* Container que organiza os cards um embaixo do outro */
+.container-produtos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* ADICIONADO: Mostra o aviso "em breve" se a lista do JavaScript estiver vazia */
+.container-produtos:not(:has(.card-produto))::before {
+    content: "Novidades deliciosas chegando em breve! ✨";
+    color: #7a665a;
+    font-style: italic;
+    font-size: 0.9rem;
+    padding: 10px 5px;
+    display: block;
+}
+
+/* A caixinha do Card do Produto (coloca foto na esquerda e textos na direita) */
+.card-produto {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 12px;
+    gap: 15px;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra leve para dar elegância */
+}
+
+/* RESOLUÇÃO DA IMAGEM: Força a foto a ficar pequena e proporcional dentro do card */
+.img-produto {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;    /* Evita que o navegador esmague a foto */
+    object-fit: cover; /* Recorta a foto proporcionalmente sem distorcer */
+    border-radius: 8px;
+}
+
+/* Bloco que guarda os textos e o botão à direita da foto */
+.detalhes-produto {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Nome do produto */
+.detalhes-produto h3 {
+    margin: 0 0 4px 0;
+    color: #333333;
+    font-size: 1.1rem;
+}
+
+/* Descrição do doce */
+.descricao {
+    margin: 0 0 8px 0;
+    color: #666666;
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+/* Preço */
+.preco {
+    font-weight: bold;
+    color: #4a2c11;
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+/* O Botão de pedir no WhatsApp elegante e responsivo */
+.btn-whatsapp {
+    display: inline-block;        
+    background-color: #25D366;    /* Verde oficial do WhatsApp */
+    color: #FFFFFF;               /* Letras brancas */
+    text-align: center;           
+    padding: 8px 16px;            /* Deixa o botão gordinho */
+    text-decoration: none;        /* Remove o sublinhado de link */
+    font-weight: bold;            /* Texto em negrito */
+    border-radius: 25px;          /* Cantos bem arredondados */
+    font-size: 0.8rem;
+    align-self: flex-start;       /* Faz o botão ocupar apenas o tamanho do seu texto */
+    transition: background-color 0.3s;  /* Transição suave ao passar o mouse */
+}
+
+/* Efeito ao passar o mouse ou o dedo no botão */
+.btn-whatsapp:hover {
+    background-color: #128C7E;    /* Verde mais escuro */
+}
+
+/* Configurações do Rodapé da página */
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #555555;
+    font-size: 0.85rem;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 5px 0;
+}
