@@ -65,9 +65,21 @@ const bebidas = [
     },
     {
         nome: "Pepsi Lata",
-        descricao: "Pepsi orig. 350ml",
+        descricao: "Pepsi orig. 350ml.",
         preco: "R$ 6,00",
         imagem: "imagens/pepsi.png"
+    },
+    {
+        nome: "Sprite Lata",
+        descricao: "Sprite original 350ml.",
+        preco: "R$ 6,00",
+        imagem: "imagens/sprite.png"
+    },
+    {
+        nome: "Monster Lata",
+        descricao: "Monster 473ml.",
+        preco: "R$ 13,00",
+        imagem: "imagens/monster.png"
     }
 ];
 
