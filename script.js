@@ -28,13 +28,13 @@ const salgados = [
         nome: "Coxinha",
         descricao: "Kit com 6 coxinhas. 300g.",
         preco: "R$ 12,00",
-        imagem: "imagens/salgado.jpeg"
+        imagem: "imagens/coxinha.png"
     },
     {
         nome: "Quibe",
         descricao: "Kit com 6 quibes. 300g.",
-        preco: "R$ 12,00", // Ajustado para manter o padrão sem os dois pontos (:)
-        imagem: "imagens/quibe.jpg"
+        preco: "R$ 12,00",
+        imagem: "imagens/quibe.png"
     }
 ];
 
@@ -52,6 +52,12 @@ const bebidas = [
         imagem: "imagens/coca-zero.png"
     },
     {
+        nome: "Pepsi Lata",
+        descricao: "Pepsi orig. 350ml.",
+        preco: "R$ 6,00",
+        imagem: "imagens/pepsi.png"
+    },
+    {
         nome: "Refrigerante Guaraná",
         descricao: "Guaraná Antártica orig. 350ml.",
         preco: "R$ 6,00",
@@ -64,16 +70,64 @@ const bebidas = [
         imagem: "imagens/guarana-zero.png"
     },
     {
-        nome: "Pepsi Lata",
-        descricao: "Pepsi orig. 350ml.",
-        preco: "R$ 6,00",
-        imagem: "imagens/pepsi.png"
-    },
-    {
         nome: "Sprite Lata",
         descricao: "Sprite original 350ml.",
         preco: "R$ 6,00",
         imagem: "imagens/sprite.png"
+    },
+    {
+        nome: "Refrigerante Sabores 200ml",
+        descricao: "Refri sabores 200ml.",
+        preco: "R$ 3,50",
+        imagem: "imagens/refri-200ml.png"
+    },
+    {
+        nome: "Refrigerante 600ml",
+        descricao: "Refri 600ml.",
+        preco: "R$ 8,00",
+        imagem: "imagens/refri-600ml.png"
+    },
+    {
+        nome: "Coca-Cola 2L",
+        descricao: "Coca 2L.",
+        preco: "R$ 14,00",
+        imagem: "imagens/coca-2l.png"
+    },
+    {
+        nome: "Pepsi 2L",
+        descricao: "Pepsi 2L.",
+        preco: "R$ 14,00",
+        imagem: "imagens/pepsi-2l.png"
+    },
+    {
+        nome: "Guaraná 2L",
+        descricao: "Guaraná 2L.",
+        preco: "R$ 13,00",
+        imagem: "imagens/guarana-2l.png"
+    },
+    {
+        nome: "Sprite 2L",
+        descricao: "Sprite 2L.",
+        preco: "R$ 13,00",
+        imagem: "imagens/sprite-2l.png"
+    },
+    {
+        nome: "Água sem Gás",
+        descricao: "Água s/ gás cristal azul 500ml.",
+        preco: "R$ 3,00",
+        imagem: "imagens/agua-sem-gas.png"
+    },
+    {
+        nome: "Água com Gás",
+        descricao: "Água c/ gás Font Life 500ml.",
+        preco: "R$ 3,00",
+        imagem: "imagens/agua-com-gas.png"
+    },
+    {
+        nome: "Chá Matte Leão",
+        descricao: "Chá matte leão orig. Copo 300ml.",
+        preco: "R$ 6,00",
+        imagem: "imagens/matte-leao.png"
     },
     {
         nome: "Monster Lata",
