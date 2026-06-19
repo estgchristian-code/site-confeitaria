@@ -1,2 +1,5 @@
 .vercel
 .env*
+backend/venv/
+backend/confeitaria.db
+backend/__pycache__/
