@@ -26,15 +26,15 @@ const doces = [
 const salgados = [
     {
         nome: "Coxinha",
-        descricao: "Kit com 6 coxinhas. 300g.",
-        preco: "R$ 12,00",
+        descricao: "Kit com 10 coxinhas artesanais e super temperadas. 340g.",
+        preco: "R$ 17,00",
         imagem: "imagens/coxinha.png"
     },
     {
-        nome: "Quibe",
-        descricao: "Kit com 6 quibes. 300g.",
-        preco: "R$ 12,00",
-        imagem: "imagens/quibe.png"
+        nome: "Kit Salgadinhos",
+        descricao: "Kit com 12 salgadinhos, incluindo coxinha, bolinha de queijo e risoles de carne. 350g.",
+        preco: "R$ 15,00",
+        imagem: "imagens/kit-salgadinhos.png"
     }
 ];
 
@@ -148,7 +148,7 @@ const hamburgueres = [
         nome: "X-Salada",
         descricao: "Pão, maionese, 90g de hambúrguer caseiro, mussarela, presunto, alface e tomate.",
         preco: "R$ 12,00",
-        imagem: "imagens/x-salada.jpg"
+        imagem: "imagens/x-salada.png"
     },
     {
         nome: "X-Egg",
