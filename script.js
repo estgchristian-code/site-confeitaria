@@ -109,7 +109,7 @@ const bebidas = [
         nome: "Sprite 2L",
         descricao: "Sprite 2L.",
         preco: "R$ 13,00",
-        imagem: "imagens/sprite-2l.png"
+        imagem: "imagens/sprite2L.png"
     },
     {
         nome: "Água sem Gás",
