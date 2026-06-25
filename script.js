@@ -97,13 +97,13 @@ const bebidas = [
         nome: "Pepsi 2L",
         descricao: "Pepsi 2L.",
         preco: "R$ 14,00",
-        imagem: "imagens/pepsi-2l.png"
+        imagem: "imagens/pepsi2l.png"
     },
     {
         nome: "Guaraná 2L",
         descricao: "Guaraná 2L.",
         preco: "R$ 13,00",
-        imagem: "imagens/guarana-2l.png"
+        imagem: "imagens/guarana2l.png"
     },
     {
         nome: "Sprite 2L",
@@ -154,7 +154,7 @@ const hamburgueres = [
         nome: "X-Egg",
         descricao: "Pão, maionese, 90g de hambúrguer caseiro, ovo, mussarela, presunto, alface e tomate.",
         preco: "R$ 15,00",
-        imagem: "imagens/x-egg.jpeg"
+        imagem: "imagens/x-egg.png"
     },
     {
         nome: "X-Calabresa",
