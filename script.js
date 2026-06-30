@@ -196,36 +196,33 @@ const hamburgueres = [
 
 
 // ==========================================================================
-// 2. CONFIGURAÇÃO GERAL E LÓGICA
+// 2. CONFIGURAÇÃO GERAL E LÓGICA DO CARRINHO
 // ==========================================================================
 
 const numeroWhats = "5541997373544"; // Número oficial da Confeitaria Norske!
+let carrinho = [];
 
-// Função reutilizável que desenha os produtos na tela
+// Função que desenha os produtos na tela
 function renderizarProdutos(listaDeProdutos, idDoContainer) {
     const container = document.getElementById(idDoContainer);
     
-    // Se não houver produtos na lista, exibe a mensagem de "em breve" do CSS
     if (listaDeProdutos.length === 0) return;
 
     listaDeProdutos.forEach(produto => {
-        // Gera o link do WhatsApp com o texto já pronto e adaptado para o produto
-        const linkWhats = `https://wa.me/${numeroWhats}?text=Olá!%20Gostaria%20de%20pedir%20o%20${encodeURIComponent(produto.nome)}`;
-
-        // Monta a estrutura HTML do card
         const cardHTML = `
             <div class="card-produto">
-                <img src="${produto.imagem}" alt="${produto.nome}" class="img-produto">
+                <img src="${produto.imagem}" alt="${produto.nome}" class="img-produto" loading="lazy">
                 <div class="detalhes-produto">
                     <h3>${produto.nome}</h3>
                     <p class="descricao">${produto.descricao}</p>
                     <p class="preco">${produto.preco}</p>
-                    <a href="${linkWhats}" class="btn-whatsapp" target="_blank">Pedir no WhatsApp</a>
+                    <button class="btn-whatsapp" onclick="adicionarAoCarrinho('${produto.nome}', '${produto.preco}')">
+                        + Adicionar
+                    </button>
                 </div>
             </div>
         `;
         
-        // Injeta o card dentro do container correto
         container.innerHTML += cardHTML;
     });
 }
@@ -235,3 +232,106 @@ renderizarProdutos(doces, 'lista-doces');
 renderizarProdutos(salgados, 'lista-salgados');
 renderizarProdutos(bebidas, 'lista-bebidas');
 renderizarProdutos(hamburgueres, 'lista-hamburgueres');
+
+// Funções de Controle do Carrinho
+function adicionarAoCarrinho(nome, precoTexto) {
+    const preco = parseFloat(precoTexto.replace("R$ ", "").replace(",", "."));
+    const itemExistente = carrinho.find(item => item.nome === nome);
+    
+    if (itemExistente) {
+        itemExistente.quantidade += 1;
+    } else {
+        carrinho.push({ nome, preco, quantidade: 1 });
+    }
+    
+    atualizarInterfaceCarrinho();
+}
+
+// Remove 1 unidade do item ou tira do carrinho se zerar
+function removerDoCarrinho(nome) {
+    const itemExistente = carrinho.find(item => item.nome === nome);
+    
+    if (itemExistente) {
+        itemExistente.quantidade -= 1;
+        
+        // Se a quantidade chegou a 0, removemos o item de vez
+        if (itemExistente.quantidade <= 0) {
+            carrinho = carrinho.filter(item => item.nome !== nome);
+        }
+    }
+    
+    atualizarInterfaceCarrinho();
+    
+    // Se o modal estiver aberto, atualiza ele em tempo real
+    const modal = document.getElementById("modal-carrinho");
+    if (!modal.classList.contains("escondido")) {
+        if (carrinho.length === 0) {
+            fecharModalCarrinho();
+        } else {
+            abrirModalCarrinho();
+        }
+    }
+}
+
+function atualizarInterfaceCarrinho() {
+    const contador = document.getElementById("contador-itens");
+    const barraFixa = document.getElementById("carrinho-fixo");
+    
+    const totalItens = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
+    contador.innerText = totalItens;
+    
+    if (totalItens > 0) {
+        barraFixa.classList.remove("escondido");
+    } else {
+        barraFixa.classList.add("escondido");
+    }
+}
+
+function abrirModalCarrinho() {
+    const modal = document.getElementById("modal-carrinho");
+    const containerItens = document.getElementById("itens-carrinho");
+    const valorTotalSpan = document.getElementById("valor-total");
+    
+    containerItens.innerHTML = "";
+    let totalGeral = 0;
+    
+    carrinho.forEach(item => {
+        const subtotal = item.preco * item.quantidade;
+        totalGeral += subtotal;
+        
+        containerItens.innerHTML += `
+            <div class="item-lista-carrinho">
+                <span><strong>${item.quantidade}x</strong> ${item.nome}</span>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span>R$ ${subtotal.toFixed(2).replace(".", ",")}</span>
+                    <button class="btn-remover-item" onclick="removerDoCarrinho('${item.nome}')" title="Remover item">❌</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    valorTotalSpan.innerText = `R$ ${totalGeral.toFixed(2).replace(".", ",")}`;
+    modal.classList.remove("escondido");
+}
+
+function fecharModalCarrinho() {
+    document.getElementById("modal-carrinho").classList.add("escondido");
+}
+
+function enviarPedidoWhatsApp() {
+    if (carrinho.length === 0) return;
+    
+    let mensagem = "Olá! Gostaria de fazer o seguinte pedido:\n\n";
+    let totalGeral = 0;
+    
+    carrinho.forEach(item => {
+        const subtotal = item.preco * item.quantidade;
+        totalGeral += subtotal;
+        mensagem += `• ${item.quantidade}x ${item.nome} - R$ ${subtotal.toFixed(2).replace(".", ",")}\n`;
+    });
+    
+    mensagem += `\n*Total: R$ ${totalGeral.toFixed(2).replace(".", ",")}*`;
+    
+    const linkWhats = `https://wa.me/${numeroWhats}?text=${encodeURIComponent(mensagem)}`;
+    window.open(linkWhats, "_blank");
+}
