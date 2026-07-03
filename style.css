@@ -8,13 +8,16 @@
 
 /* Regras para o corpo/fundo de toda a página */
 body {
-    background-color: rgb(240, 222, 203); /* Define a cor de fundo do site */
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, rgb(221, 198, 174), rgb(252, 239, 225)); /* Define a cor de fundo do site */
     color: #4a4a4a;                       /* Define a cor padrão de todos os textos como um cinza escuro elegante */
 }
 
 /* Regras para o cabeçalho (o topo do seu site) */
 header {
-    background-color: #4A2511; /* Define o fundo marrom escuro da sua marca */
+    /* ALTERADO: Aplicado o degradê angular usando os tons mais escuros da sua paleta do Adobe Color */
+    background: linear-gradient(135deg, #5e3f1f, #331E08);
     text-align: center;                  /* Centraliza todos os textos (h1 e p) que estão dentro do cabeçalho */
     padding: 30px 15px;                  /* Cria um espaço de 30px em cima/baixo e 15px nas laterais para o cabeçalho respirar */
     border-bottom-left-radius: 20px;     /* Arredonda o canto inferior esquerdo do cabeçalho */
@@ -51,7 +54,7 @@ h2 {
     font-size: 1.4rem;
 }
 
-/* Container que organiza os cards um embaixo do outro */
+/* Container que organizes os cards um embaixo do outro */
 .container-produtos {
     display: flex;
     flex-direction: column;
@@ -176,7 +179,8 @@ footer p {
 
 #btn-ver-carrinho {
     width: 100%;
-    background-color: #4A2511;
+    /* ALTERADO: Aplicado o mesmo degradê do cabeçalho para criar unidade visual */
+    background: linear-gradient(135deg, #573B1E, #331E08);
     color: white;
     border: none;
     padding: 15px;
@@ -189,7 +193,8 @@ footer p {
 }
 
 #btn-ver-carrinho:hover {
-    background-color: #361b0c;
+    /* Efeito de hover sutil usando filtro de brilho, já que degradês fixos não aceitam transição simples de cor */
+    filter: brightness(1.2);
 }
 
 /* Modal / Tela de fundo escurecido */
@@ -219,7 +224,8 @@ footer p {
 .modal-conteudo h2 {
     margin-top: 0;
     margin-bottom: 15px;
-    border-bottom: 2px solid #4A2511;
+    /* ALTERADO: Atualizada a borda do título do modal com o tom marrom escuro da paleta */
+    border-bottom: 2px solid #573B1E;
     padding-bottom: 8px;
 }
 
@@ -241,7 +247,8 @@ footer p {
     text-align: right;
     margin-top: 15px;
     font-size: 1.2rem;
-    color: #4A2511;
+    /* ALTERADO: Cor do preço total atualizada para o marrom escuro */
+    color: #573B1E;
 }
 
 .modal-botoes {
