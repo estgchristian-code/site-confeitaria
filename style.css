@@ -28,7 +28,8 @@ header {
 header h1 {
     color: rgb(221, 115, 115); /* Define a cor do título como o tom rosa/marrom */
     font-size: 1.8rem;       /* Define o tamanho da fonte do título principal */
-    margin-bottom: 5px;      /* Cria uma margem de 5px embaixo do título para desgrudar do slogan */
+    margin-bottom: 5px;     /* Cria uma margem de 5px embaixo do título para desgrudar do slogan */
+    text-shadow: 2px 2px 4px rgba(102, 40, 40, 0.664);
 }
 
 /* Regras específicas para o parágrafo (slogan ou descrição) dentro do cabeçalho */
