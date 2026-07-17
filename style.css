@@ -1,3 +1,140 @@
+/* Barra de informações no topo (entrega, horário) */
+.info-bar {
+    background: linear-gradient(135deg, #573B1E, #331E08);
+    color: #f5e6d3;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.info-bar span {
+    white-space: nowrap;
+}
+
+/* Botão flutuante do WhatsApp (sempre visível) */
+.whatsapp-float {
+    position: fixed;
+    bottom: 80px;
+    right: 15px;
+    background: #25D366;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 998;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: pulse-whats 2s infinite;
+}
+.whatsapp-float:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+.whatsapp-icon {
+    font-size: 1.3rem;
+}
+@media (min-width: 650px) {
+    .whatsapp-float {
+        bottom: 30px;
+        right: 30px;
+    }
+}
+@keyframes pulse-whats {
+    0%, 100% { box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 4px 25px rgba(37, 211, 102, 0.7); }
+}
+
+/* Botão Voltar ao Topo */
+.btn-topo {
+    position: fixed;
+    bottom: 80px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #573B1E, #331E08);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 997;
+    transition: transform 0.2s;
+}
+.btn-topo:hover {
+    transform: scale(1.1);
+}
+@media (min-width: 650px) {
+    .btn-topo {
+        bottom: 30px;
+        left: 30px;
+    }
+    .whatsapp-float {
+        bottom: 30px;
+        right: 30px;
+    }
+}
+
+/* Animação de entrada dos cards */
+.card-produto {
+    animation: fadeInUp 0.4s ease both;
+}
+.card-produto:nth-child(1) { animation-delay: 0.05s; }
+.card-produto:nth-child(2) { animation-delay: 0.1s; }
+.card-produto:nth-child(3) { animation-delay: 0.15s; }
+.card-produto:nth-child(4) { animation-delay: 0.2s; }
+.card-produto:nth-child(5) { animation-delay: 0.25s; }
+.card-produto:nth-child(6) { animation-delay: 0.3s; }
+.card-produto:nth-child(7) { animation-delay: 0.35s; }
+.card-produto:nth-child(8) { animation-delay: 0.4s; }
+.card-produto:nth-child(9) { animation-delay: 0.45s; }
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Link de "Pular para conteúdo" (acessibilidade) - fica invisível até receber foco via Tab */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 10px;
+    background: #5e3f1f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 0 8px 8px;
+    z-index: 10000;
+    font-weight: bold;
+    text-decoration: none;
+    transition: top 0.2s;
+}
+.skip-link:focus {
+    top: 0;
+}
+
+/* Aviso para usuários sem JavaScript */
+.noscript-aviso {
+    background: #fff3cd;
+    color: #856404;
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+    border-bottom: 2px solid #ffc107;
+}
+
 /* O asterisco (*) significa "Reset": aplica as regras a absolutamente TODOS os elementos da página */
 * {
     margin: 0;              /* Remove as margens padrão que os navegadores colocam sozinhos */
@@ -10,7 +147,7 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background: linear-gradient(to bottom, rgb(221, 198, 174), rgb(252, 239, 225)); /* Define a cor de fundo do site */
+    background: linear-gradient(to bottom, rgb(221, 198, 174), rgb(229, 212, 194)); /* Define a cor de fundo do site */
     color: #4a4a4a;                       /* Define a cor padrão de todos os textos como um cinza escuro elegante */
 }
 

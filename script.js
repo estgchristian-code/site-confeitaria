@@ -42,67 +42,57 @@ const bebidas = [
     {
         nome: "Coca-Cola Lata",
         descricao: "Coca orig. 350ml.",
-        preco: "R$ 6,00",
+        preco: "R$ 7,00",
         imagem: "imagens/coca.png"
     },
     {
         nome: "Coca-Cola Lata Zero",
         descricao: "Coca zero 350ml.",
-        preco: "R$ 6,00",
+        preco: "R$ 7,00",
         imagem: "imagens/coca-zero.png"
     },
     {
         nome: "Pepsi Lata",
         descricao: "Pepsi orig. 350ml.",
-        preco: "R$ 6,00",
+        preco: "R$ 7,00",
         imagem: "imagens/pepsi.png"
     },
     {
         nome: "Refrigerante Guaraná",
         descricao: "Guaraná Antártica orig. 350ml.",
-        preco: "R$ 6,00",
+        preco: "R$ 7,00",
         imagem: "imagens/guarana.png"
     },
     {
         nome: "Refrigerante Guaraná Zero",
         descricao: "Guaraná Antártica zero. 350ml.",
-        preco: "R$ 6,00",
+        preco: "R$ 7,00",
         imagem: "imagens/guarana-zero.png"
     },
     {
         nome: "Sprite Lata",
         descricao: "Sprite original 350ml.",
-        preco: "R$ 6,00",
+        preco: "R$ 7,00",
         imagem: "imagens/sprite.png"
     },
-    {
-        nome: "Refrigerante Sabores 200ml",
-        descricao: "Refri sabores 200ml.",
-        preco: "R$ 3,50",
-        imagem: "imagens/refri-200ml.png"
-    },
-    {
-        nome: "Refrigerante 600ml",
-        descricao: "Refri 600ml.",
-        preco: "R$ 8,00",
-        imagem: "imagens/refri-600ml.png"
-    },
+
+
     {
         nome: "Coca-Cola 2L",
         descricao: "Coca 2L.",
-        preco: "R$ 14,00",
+        preco: "R$ 15,00",
         imagem: "imagens/coca-cola.png"
     },
     {
         nome: "Pepsi 2L",
         descricao: "Pepsi 2L.",
-        preco: "R$ 14,00",
+        preco: "R$ 15,00",
         imagem: "imagens/pepsi2l.png"
     },
     {
         nome: "Guaraná 2L",
         descricao: "Guaraná 2L.",
-        preco: "R$ 13,00",
+        preco: "R$ 14,00",
         imagem: "imagens/guarana2l.png"
     },
     {
@@ -114,20 +104,20 @@ const bebidas = [
     {
         nome: "Água sem Gás",
         descricao: "Água s/ gás cristal azul 500ml.",
-        preco: "R$ 3,00",
+        preco: "R$ 4,00",
         imagem: "imagens/agua-sem-gas.png"
     },
     {
         nome: "Água com Gás",
         descricao: "Água c/ gás Font Life 500ml.",
-        preco: "R$ 3,00",
+        preco: "R$ 4,00",
         imagem: "imagens/agua-com-gas.png"
     },
     {
         nome: "Chá Matte Leão",
         descricao: "Chá matte leão orig. Copo 300ml.",
-        preco: "R$ 6,00",
-        imagem: "imagens/matte-leao.png"
+        preco: "R$ 7,00",
+        imagem: "imagens/cha-mate.png"
     },
     {
         nome: "Monster Lata",
@@ -142,7 +132,7 @@ const hamburgueres = [
         nome: "X-Burguer",
         descricao: "Pão, maionese, 90g de hambúrguer caseiro, mussarela.",
         preco: "R$ 11,00",
-        imagem: "imagens/x-burguer.jpeg"
+        imagem: "imagens/x-burguer.png"
     },
     {
         nome: "X-Salada",
@@ -160,19 +150,19 @@ const hamburgueres = [
         nome: "X-Calabresa",
         descricao: "Pão, maionese, 90g de hambúrguer caseiro, calabresa, mussarela, presunto, alface e tomate.",
         preco: "R$ 15,00",
-        imagem: "imagens/x-calabresa.jpeg"
+        imagem: "imagens/x-calabresa02.png"
     },
     {
         nome: "X-Frango",
         descricao: "Pão, maionese, 90g de filé de frango, mussarela, catupiry, alface e tomate.",
         preco: "R$ 15,00",
-        imagem: "imagens/x-frango.jpeg"
+        imagem: "imagens/x-frango.png"
     },
     {
         nome: "X-Bacon",
-        descricao: "Pão, maionese, 90g de hambúrguer caseiro, Bacon mussarela, presunto, alface e tomate.",
+        descricao: "Pão, maionese, 90g de hambúrguer caseiro, bacon, mussarela, presunto, alface e tomate.",
         preco: "R$ 15,00",
-        imagem: "imagens/x-bacon.jpeg"
+        imagem: "imagens/x-bacon.png"
     },
     {
         nome: "X-Tudo",
@@ -200,7 +190,7 @@ const hamburgueres = [
 // ==========================================================================
 
 const numeroWhats = "5541997373544"; // Número oficial da Confeitaria Norske!
-let carrinho = [];
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 // Função que desenha os produtos na tela
 function renderizarProdutos(listaDeProdutos, idDoContainer) {
@@ -233,6 +223,14 @@ renderizarProdutos(salgados, 'lista-salgados');
 renderizarProdutos(bebidas, 'lista-bebidas');
 renderizarProdutos(hamburgueres, 'lista-hamburgueres');
 
+// Restaura o carrinho salvo no navegador (se houver)
+atualizarInterfaceCarrinho();
+
+// Salva o carrinho no navegador para não perder ao recarregar
+function salvarCarrinho() {
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
 // Funções de Controle do Carrinho
 function adicionarAoCarrinho(nome, precoTexto) {
     const preco = parseFloat(precoTexto.replace("R$ ", "").replace(",", "."));
@@ -244,6 +242,7 @@ function adicionarAoCarrinho(nome, precoTexto) {
         carrinho.push({ nome, preco, quantidade: 1 });
     }
     
+    salvarCarrinho();
     atualizarInterfaceCarrinho();
 }
 
@@ -260,6 +259,7 @@ function removerDoCarrinho(nome) {
         }
     }
     
+    salvarCarrinho();
     atualizarInterfaceCarrinho();
     
     // Se o modal estiver aberto, atualiza ele em tempo real
@@ -335,3 +335,20 @@ function enviarPedidoWhatsApp() {
     const linkWhats = `https://wa.me/${numeroWhats}?text=${encodeURIComponent(mensagem)}`;
     window.open(linkWhats, "_blank");
 }
+
+// ==========================================================================
+// 3. BOTÃO VOLTAR AO TOPO
+// ==========================================================================
+
+function voltarAoTopo() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('scroll', function() {
+    const btn = document.getElementById('btn-topo');
+    if (window.scrollY > 400) {
+        btn.classList.remove('escondido');
+    } else {
+        btn.classList.add('escondido');
+    }
+});

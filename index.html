@@ -3,38 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cardápio online da Confeitaria Norske - Doces, salgados, bebidas e hambúrgueres artesanais. Faça seu pedido pelo WhatsApp!">
+    <meta name="theme-color" content="#5e3f1f">
+    <meta property="og:title" content="Confeitaria Norske - Cardápio">
+    <meta property="og:description" content="Doces e Salgados Artesanais Feitos com Carinho!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://confeitarianorske.com.br">
+    <meta property="og:image" content="imagens/logo-norske-3.png">
+    <meta name="twitter:card" content="summary">
     <title>Confeitaria Norske - Cardápio</title>
     <link rel="stylesheet" href="style.css">
     <meta name="google-site-verification" content="tj-Pj9nlVmdV6fjmuz3kpzjRxeQj8tBtRoUdzQ4xh70" />
     <link rel="icon" href="imagens/logo-norske-3.png" type="image/png">
+    <link rel="apple-touch-icon" href="imagens/logo-norske-3.png">
 </head>
 <body>
 
-    <header>
+    <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+    <noscript>
+        <div class="noscript-aviso">Habilite o JavaScript para visualizar o cardápio e fazer pedidos.</div>
+    </noscript>
+
+    <div class="info-bar">
+        <span>📞 Pedidos pelo WhatsApp</span>
+        <span>⏰ 10h às 17h (seg-sex)</span>
+        <span>🚚 Taxa de entrega: R$ 5,00</span>
+    </div>
+
+    <header role="banner">
         <h1>Confeitaria Norske</h1>
         <p>Doces e Salgados Artesanais Feitos com Carinho!</p>
     </header>
 
-    <main class="cardapio-container">
+    <main class="cardapio-container" id="conteudo-principal" role="main">
 
-        <section class="categoria">
-            <h2>Doces e bolos</h2>
-            <div class="container-produtos" id="lista-doces"></div>
+        <section class="categoria" aria-labelledby="titulo-doces">
+            <h2 id="titulo-doces">Doces e bolos</h2>
+            <div class="container-produtos" id="lista-doces" role="list"></div>
         </section>
 
-        <section class="categoria">
-            <h2>Salgados</h2>
-            <div class="container-produtos" id="lista-salgados"></div>
+        <section class="categoria" aria-labelledby="titulo-salgados">
+            <h2 id="titulo-salgados">Salgados</h2>
+            <div class="container-produtos" id="lista-salgados" role="list"></div>
         </section>
 
-        <section class="categoria">
-            <h2>Bebidas</h2>
-            <div class="container-produtos" id="lista-bebidas"></div>
+        <section class="categoria" aria-labelledby="titulo-bebidas">
+            <h2 id="titulo-bebidas">Bebidas</h2>
+            <div class="container-produtos" id="lista-bebidas" role="list"></div>
         </section>
 
-        <section class="categoria">
-            <h2>Hambúrgueres</h2>
-            <div class="container-produtos" id="lista-hamburgueres"></div>
+        <section class="categoria" aria-labelledby="titulo-hamburgueres">
+            <h2 id="titulo-hamburgueres">Hambúrgueres</h2>
+            <div class="container-produtos" id="lista-hamburgueres" role="list"></div>
         </section>
 
     </main>
@@ -47,7 +68,7 @@
     </div>
 
     <!-- Modal (Janela flutuante) com o resumo do pedido -->
-    <div id="modal-carrinho" class="modal escondido">
+    <div id="modal-carrinho" class="modal escondido" role="dialog" aria-modal="true" aria-label="Resumo do pedido">
         <div class="modal-conteudo">
             <h2>Seu Pedido</h2>
             <div id="itens-carrinho"></div>
@@ -61,12 +82,48 @@
         </div>
     </div>
 
+    <a href="https://wa.me/5541997373544?text=Olá! Gostaria de fazer um pedido." target="_blank" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp" title="Fale conosco">
+        <span class="whatsapp-icon">📱</span>
+        <span class="whatsapp-text">Fale Conosco</span>
+    </a>
+
+    <button id="btn-topo" class="btn-topo escondido" onclick="voltarAoTopo()" aria-label="Voltar ao topo">↑</button>
+
     <footer>
         <p>&copy; 2026 Confeitaria Norske - Todos os direitos reservados.</p>
         <p>Imagens criadas com IA</p>
-        <p>Horário de atendimento: das 10h às 17h (segunda a sábado).</p>
     </footer>
 
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Menu",
+        "name": "Cardápio Confeitaria Norske",
+        "description": "Doces e Salgados Artesanais Feitos com Carinho!",
+        "hasMenuSection": [
+            {
+                "@type": "MenuSection",
+                "name": "Doces e bolos",
+                "description": "Bolos e doces artesanais"
+            },
+            {
+                "@type": "MenuSection",
+                "name": "Salgados",
+                "description": "Salgados artesanais"
+            },
+            {
+                "@type": "MenuSection",
+                "name": "Bebidas",
+                "description": "Refrigerantes e bebidas"
+            },
+            {
+                "@type": "MenuSection",
+                "name": "Hambúrgueres",
+                "description": "Hambúrgueres artesanais"
+            }
+        ]
+    }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
