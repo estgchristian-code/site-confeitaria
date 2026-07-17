@@ -13,13 +13,13 @@ const doces = [
         nome: "Sensação",
         descricao: "Chocolate com morango. 250g.",
         preco: "R$ 11,00",
-        imagem: "imagens/sensacao.jpeg"
+        imagem: "imagens/bolo-sensacao.png"
     },
     {
         nome: "Bolo de Cenoura",
         descricao: "Bolo de cenoura com calda de brigadeiro.",
         preco: "R$ 15,00",
-        imagem: "imagens/bolo-cenoura.jpeg"
+        imagem: "imagens/bolo-cenoura.png"
     }
 ];
 
@@ -168,19 +168,19 @@ const hamburgueres = [
         nome: "X-Tudo",
         descricao: "Pão, maionese, 90g de hambúrguer caseiro, filé de frango, calabresa, ovo, bacon mussarela, presunto, alface e tomate.",
         preco: "R$ 21,00",
-        imagem: "imagens/x-tudo.jpeg"
+        imagem: "imagens/x-tudo.png"
     },
     {
         nome: "X da casa",
         descricao: "Pão, maionese, 90g de hambúrguer caseiro, filé de frango, calabresa, ovo, bacon, mussarela, cheddar, batata palha, presunto, alface e tomate.",
         preco: "R$ 26,00",
-        imagem: "imagens/x-casa.jpeg"
+        imagem: "imagens/x-casa.png"
     },
     {
         nome: "X-Dog",
-        descricao: "Pão, maionese, duas vinas, bacon catupiry, batata palha, farofa, milho, ervilha e tomate.",
+        descricao: "Pão, maionese, duas vinas, bacon, catupiry, batata palha, farofa, milho, ervilha e tomate.",
         preco: "R$ 14,00",
-        imagem: "imagens/x-dog.jpeg"
+        imagem: "imagens/x-dog.png"
     }
 ];
 
