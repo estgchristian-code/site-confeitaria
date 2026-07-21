@@ -434,3 +434,145 @@ footer p {
 .btn-remover-item:hover {
     background-color: rgba(255, 0, 0, 0.1); /* Dá um fundinho vermelho leve ao passar o mouse */
 }
+
+/* Barra de Acessibilidade */
+.acessibilidade-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #ee8d9a;
+  font-size: 0.9rem;
+}
+
+.acessibilidade-bar button {
+  background-color: #fdfdfd;
+  border: 1px solid #dfdede;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.acessibilidade-bar button:hover,
+.acessibilidade-bar button:focus {
+  background-color: #007bff;
+  color: #ffffff;
+  border-color: #0056b3;
+}
+
+/* Troque 'body' por 'html' para que as unidades 'rem' funcionem corretamente */
+html {
+  font-size: 100%; /* Tamanho base de referência */
+  transition: font-size 0.2s ease;
+}
+
+/* Estilização da Barra de Acessibilidade */
+.acessibilidade-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.85rem;
+}
+
+.controle-fonte, .controle-cor {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.acessibilidade-bar button {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #333333;
+}
+
+.acessibilidade-bar button:hover {
+  background-color: #007bff;
+  color: #ffffff;
+  border-color: #0056b3;
+}
+
+/* ==========================================================================
+   PALETA DE ALTO CONTRASTE / MODO DALTÔNICO (WCAG AAA)
+   ========================================================================== */
+body.modo-daltonico {
+  background: #121212 !important; /* Fundo escuro absoluto */
+  color: #ffffff !important;
+}
+
+body.modo-daltonico header,
+body.modo-daltonico .info-bar,
+body.modo-daltonico #btn-ver-carrinho,
+body.modo-daltonico .btn-topo {
+  background: #1e1e1e !important;
+  border: 1px solid #ffcc00 !important;
+}
+
+body.modo-daltonico header h1 {
+  color: #ffcc00 !important; /* Amarelo universal de alto contraste */
+  text-shadow: none !important;
+}
+
+body.modo-daltonico h2 {
+  color: #ffcc00 !important;
+  border-bottom-color: #ffcc00 !important;
+}
+
+body.modo-daltonico .card-produto {
+  background-color: #1e1e1e !important;
+  border: 1px solid #444444 !important;
+}
+
+body.modo-daltonico .detalhes-produto h3 {
+  color: #ffffff !important;
+}
+
+body.modo-daltonico .descricao {
+  color: #cccccc !important;
+}
+
+body.modo-daltonico .preco {
+  color: #ffcc00 !important;
+}
+
+/* Botões do WhatsApp e Ações usam Azul Cobalto de alto contraste (evita confusão verde/vermelho) */
+body.modo-daltonico .btn-whatsapp,
+body.modo-daltonico .whatsapp-float,
+body.modo-daltonico .btn-enviar-whats {
+  background-color: #0055ff !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(0, 85, 255, 0.4) !important;
+}
+
+body.modo-daltonico .modal-conteudo {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border: 2px solid #ffcc00 !important;
+}
+
+body.modo-daltonico .item-lista-carrinho {
+  border-bottom-color: #333333 !important;
+}
+
+body.modo-daltonico .total-carrinho {
+  color: #ffcc00 !important;
+}
+
+body.modo-daltonico #btn-daltonico {
+  background-color: #ffcc00 !important;
+  color: #000000 !important;
+  border-color: #ffcc00 !important;
+}

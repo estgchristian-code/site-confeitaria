@@ -75,8 +75,6 @@ const bebidas = [
         preco: "R$ 7,00",
         imagem: "imagens/sprite.png"
     },
-
-
     {
         nome: "Coca-Cola 2L",
         descricao: "Coca 2L.",
@@ -196,7 +194,7 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 function renderizarProdutos(listaDeProdutos, idDoContainer) {
     const container = document.getElementById(idDoContainer);
     
-    if (listaDeProdutos.length === 0) return;
+    if (!container || listaDeProdutos.length === 0) return;
 
     listaDeProdutos.forEach(produto => {
         const cardHTML = `
@@ -264,7 +262,7 @@ function removerDoCarrinho(nome) {
     
     // Se o modal estiver aberto, atualiza ele em tempo real
     const modal = document.getElementById("modal-carrinho");
-    if (!modal.classList.contains("escondido")) {
+    if (modal && !modal.classList.contains("escondido")) {
         if (carrinho.length === 0) {
             fecharModalCarrinho();
         } else {
@@ -277,6 +275,8 @@ function atualizarInterfaceCarrinho() {
     const contador = document.getElementById("contador-itens");
     const barraFixa = document.getElementById("carrinho-fixo");
     
+    if (!contador || !barraFixa) return;
+
     const totalItens = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
     contador.innerText = totalItens;
     
@@ -292,6 +292,8 @@ function abrirModalCarrinho() {
     const containerItens = document.getElementById("itens-carrinho");
     const valorTotalSpan = document.getElementById("valor-total");
     
+    if (!modal || !containerItens || !valorTotalSpan) return;
+
     containerItens.innerHTML = "";
     let totalGeral = 0;
     
@@ -315,7 +317,8 @@ function abrirModalCarrinho() {
 }
 
 function fecharModalCarrinho() {
-    document.getElementById("modal-carrinho").classList.add("escondido");
+    const modal = document.getElementById("modal-carrinho");
+    if (modal) modal.classList.add("escondido");
 }
 
 function enviarPedidoWhatsApp() {
@@ -346,9 +349,72 @@ function voltarAoTopo() {
 
 window.addEventListener('scroll', function() {
     const btn = document.getElementById('btn-topo');
-    if (window.scrollY > 400) {
-        btn.classList.remove('escondido');
-    } else {
-        btn.classList.add('escondido');
+    if (btn) {
+        if (window.scrollY > 400) {
+            btn.classList.remove('escondido');
+        } else {
+            btn.classList.add('escondido');
+        }
     }
 });
+
+// ==========================================================================
+// 4. CONTROLE DE TAMANHO DE FONTE (ACESSIBILIDADE)
+// ==========================================================================
+
+let fontScale = 100; // Porcentagem padrão (100%)
+
+const btnAumentar = document.getElementById('btn-aumentar-fonte');
+const btnDiminuir = document.getElementById('btn-diminuir-fonte');
+const btnReset = document.getElementById('btn-reset-fonte');
+
+// Altera o tamanho da fonte diretamente na raiz (HTML), afetando todas as unidades 'rem'
+if (btnAumentar) {
+    btnAumentar.addEventListener('click', () => {
+        if (fontScale < 140) {
+            fontScale += 10;
+            document.documentElement.style.fontSize = `${fontScale}%`;
+        }
+    });
+}
+
+if (btnDiminuir) {
+    btnDiminuir.addEventListener('click', () => {
+        if (fontScale > 80) {
+            fontScale -= 10;
+            document.documentElement.style.fontSize = `${fontScale}%`;
+        }
+    });
+}
+
+if (btnReset) {
+    btnReset.addEventListener('click', () => {
+        fontScale = 100;
+        document.documentElement.style.fontSize = '100%';
+    });
+}
+
+// ==========================================================================
+// 5. MODO DALTÔNICO / ALTO CONTRASTE
+// ==========================================================================
+
+const btnDaltonico = document.getElementById('btn-daltonico');
+
+// Verifica se o usuário já havia ativado o modo anteriormente
+if (localStorage.getItem('modoDaltonico') === 'ativo') {
+  document.body.classList.add('modo-daltonico');
+}
+
+if (btnDaltonico) {
+  btnDaltonico.addEventListener('click', () => {
+    // Alterna a classe no body
+    document.body.classList.toggle('modo-daltonico');
+
+    // Salva a preferência no localStorage
+    if (document.body.classList.contains('modo-daltonico')) {
+      localStorage.setItem('modoDaltonico', 'ativo');
+    } else {
+      localStorage.setItem('modoDaltonico', 'inativo');
+    }
+  });
+}
