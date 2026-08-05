@@ -204,7 +204,7 @@ function renderizarProdutos(listaDeProdutos, idDoContainer) {
                     <h3>${produto.nome}</h3>
                     <p class="descricao">${produto.descricao}</p>
                     <p class="preco">${produto.preco}</p>
-                    <button class="btn-whatsapp" onclick="adicionarAoCarrinho('${produto.nome}', '${produto.preco}')">
+                    <button class="btn-whatsapp" data-nome="${produto.nome}" data-preco="${produto.preco}">
                         + Adicionar
                     </button>
                 </div>
@@ -304,9 +304,9 @@ function abrirModalCarrinho() {
         containerItens.innerHTML += `
             <div class="item-lista-carrinho">
                 <span><strong>${item.quantidade}x</strong> ${item.nome}</span>
-                <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="acoes-item-carrinho">
                     <span>R$ ${subtotal.toFixed(2).replace(".", ",")}</span>
-                    <button class="btn-remover-item" onclick="removerDoCarrinho('${item.nome}')" title="Remover item">❌</button>
+                    <button class="btn-remover-item" data-nome="${item.nome}" title="Remover item">❌</button>
                 </div>
             </div>
         `;
@@ -418,3 +418,37 @@ if (btnDaltonico) {
     }
   });
 }
+
+// ==========================================================================
+// 6. EVENTOS COM addEventListener (CSP "script-src 'self'" — sem handlers
+//    inline, garantindo que o Content-Security-Policy do vercel.json funcione)
+// ==========================================================================
+
+// Delegação de eventos: botões criados dinamicamente (produtos e carrinho)
+document.addEventListener('click', function (evento) {
+    const btnAdicionar = evento.target.closest('.btn-whatsapp');
+
+    if (btnAdicionar) {
+        adicionarAoCarrinho(btnAdicionar.dataset.nome, btnAdicionar.dataset.preco);
+        return;
+    }
+
+    const btnRemover = evento.target.closest('.btn-remover-item');
+
+    if (btnRemover) {
+        removerDoCarrinho(btnRemover.dataset.nome);
+    }
+});
+
+// Botões estáticos do HTML
+const btnVerCarrinho = document.getElementById('btn-ver-carrinho');
+if (btnVerCarrinho) btnVerCarrinho.addEventListener('click', abrirModalCarrinho);
+
+const btnFechar = document.querySelector('.btn-fechar');
+if (btnFechar) btnFechar.addEventListener('click', fecharModalCarrinho);
+
+const btnEnviarWhats = document.querySelector('.btn-enviar-whats');
+if (btnEnviarWhats) btnEnviarWhats.addEventListener('click', enviarPedidoWhatsApp);
+
+const btnTopo = document.getElementById('btn-topo');
+if (btnTopo) btnTopo.addEventListener('click', voltarAoTopo);

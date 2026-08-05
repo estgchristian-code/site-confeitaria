@@ -505,6 +505,13 @@ footer p {
     color: var(--texto);
 }
 
+/* Ações (preço + remover) dentro de cada item do carrinho */
+.acoes-item-carrinho {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .total-carrinho {
     text-align: right;
     margin-top: 15px;

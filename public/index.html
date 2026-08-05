@@ -79,7 +79,7 @@
 
     <!-- Botão Fixo do Carrinho (só aparece se tiver itens) -->
     <div id="carrinho-fixo" class="escondido">
-        <button id="btn-ver-carrinho" onclick="abrirModalCarrinho()">
+        <button id="btn-ver-carrinho">
             🛒 Ver Pedido (<span id="contador-itens">0</span>)
         </button>
     </div>
@@ -93,8 +93,8 @@
                 <strong>Total: </strong><span id="valor-total">R$ 0,00</span>
             </div>
             <div class="modal-botoes">
-                <button onclick="fecharModalCarrinho()" class="btn-fechar">Continuar Comprando</button>
-                <button onclick="enviarPedidoWhatsApp()" class="btn-enviar-whats">Enviar para o WhatsApp</button>
+                <button class="btn-fechar">Continuar Comprando</button>
+                <button class="btn-enviar-whats">Enviar para o WhatsApp</button>
             </div>
         </div>
     </div>
@@ -104,7 +104,7 @@
         <span class="whatsapp-text">Fale Conosco</span>
     </a>
 
-    <button id="btn-topo" class="btn-topo escondido" onclick="voltarAoTopo()" aria-label="Voltar ao topo">↑</button>
+    <button id="btn-topo" class="btn-topo escondido" aria-label="Voltar ao topo">↑</button>
 
     <footer>
         <p>&copy; 2026 Confeitaria Norske - Todos os direitos reservados.</p>
