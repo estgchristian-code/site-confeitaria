@@ -1,10 +1,68 @@
-/* Barra de informações no topo (entrega, horário) */
+/* ==========================================================================
+   CONFEITARIA NORSKE - ESTILO DO CARDÁPIO
+   Paleta acolhedora de confeitaria: tons terrosos, marrom aconchegante e
+   detalhes em caramelo. Tipografia serifada nos títulos + sombras suaves.
+   ========================================================================== */
+
+:root {
+    --marrom-escuro: #3b2410;
+    --marrom: #5e3f1f;
+    --caramelo: #c98a3d;
+    --caramelo-escuro: #a05a12;
+    --creme: #faf3e8;
+    --creme-2: #f2e3cd;
+    --branco: #ffffff;
+    --texto: #3d3529;
+    --texto-suave: #7a6a58;
+    --verde-whats: #25d366;
+    --verde-whats-escuro: #1da851;
+    --rosa-destaque: #d97070;
+    --sombra-card: 0 6px 24px rgba(94, 63, 31, 0.10);
+    --sombra-card-hover: 0 14px 34px rgba(94, 63, 31, 0.20);
+    --fonte-titulo: Georgia, 'Palatino Linotype', 'Book Antiqua', serif;
+    --fonte-corpo: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+    --raio-card: 18px;
+}
+
+/* Reset: remove margens/paddings padrão e padroniza a fonte */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fonte-corpo);
+}
+
+html {
+    font-size: 100%; /* Base para os botões A-/A/A+ de acessibilidade */
+    transition: font-size 0.2s ease;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(201, 138, 61, 0.12), transparent 45%),
+        radial-gradient(circle at 85% 90%, rgba(217, 112, 112, 0.10), transparent 45%),
+        linear-gradient(to bottom, #f7ecdb, #f1e0c8);
+    color: var(--texto);
+    -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+    background: rgba(201, 138, 61, 0.35);
+}
+
+/* ==========================================================================
+   BARRA DE INFORMAÇÕES (entrega, horário)
+   ========================================================================== */
 .info-bar {
-    background: linear-gradient(135deg, #573B1E, #331E08);
+    background: linear-gradient(135deg, #573b1e, #331e08);
     color: #f5e6d3;
     text-align: center;
     padding: 8px 10px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.3px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -14,106 +72,93 @@
     white-space: nowrap;
 }
 
-/* Botão flutuante do WhatsApp (sempre visível) */
-.whatsapp-float {
-    position: fixed;
-    bottom: 80px;
-    right: 15px;
-    background: #25D366;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
+/* ==========================================================================
+   CABEÇALHO
+   ========================================================================== */
+header {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.07), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(201, 138, 61, 0.30), transparent 55%),
+        linear-gradient(135deg, #5e3f1f, #331e08);
+    text-align: center;
+    padding: 24px 12px;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    box-shadow: 0 8px 24px rgba(51, 30, 8, 0.25);
+}
+
+header h1 {
+    font-family: var(--fonte-titulo);
+    color: rgb(221, 115, 115);
+    font-size: 1.8rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    text-shadow: 2px 2px 4px rgba(102, 40, 40, 0.664);
+}
+
+header p {
+    color: #f5e6d3;
     font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.92;
+}
+
+/* ==========================================================================
+   BARRA DE ACESSIBILIDADE (fonte + daltonismo) - fixa no topo
+   ========================================================================== */
+.acessibilidade-bar {
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    z-index: 998;
-    transition: transform 0.2s, box-shadow 0.2s;
-    animation: pulse-whats 2s infinite;
-}
-.whatsapp-float:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-}
-.whatsapp-icon {
-    font-size: 1.3rem;
-}
-@media (min-width: 650px) {
-    .whatsapp-float {
-        bottom: 30px;
-        right: 30px;
-    }
-}
-@keyframes pulse-whats {
-    0%, 100% { box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
-    50% { box-shadow: 0 4px 25px rgba(37, 211, 102, 0.7); }
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(94, 63, 31, 0.12);
+    font-size: 0.82rem;
+    position: sticky;
+    top: 0;
+    z-index: 900;
 }
 
-/* Botão Voltar ao Topo */
-.btn-topo {
-    position: fixed;
-    bottom: 80px;
-    left: 15px;
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, #573B1E, #331E08);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.3rem;
+.controle-fonte,
+.controle-cor {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.acessibilidade-bar button {
+    background-color: var(--branco);
+    border: 1px solid #d8c7b0;
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-weight: bold;
+    font-size: 0.85rem;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    z-index: 997;
-    transition: transform 0.2s;
-}
-.btn-topo:hover {
-    transform: scale(1.1);
-}
-@media (min-width: 650px) {
-    .btn-topo {
-        bottom: 30px;
-        left: 30px;
-    }
-    .whatsapp-float {
-        bottom: 30px;
-        right: 30px;
-    }
+    color: var(--texto);
+    transition: all 0.2s ease;
 }
 
-/* Animação de entrada dos cards */
-.card-produto {
-    animation: fadeInUp 0.4s ease both;
-}
-.card-produto:nth-child(1) { animation-delay: 0.05s; }
-.card-produto:nth-child(2) { animation-delay: 0.1s; }
-.card-produto:nth-child(3) { animation-delay: 0.15s; }
-.card-produto:nth-child(4) { animation-delay: 0.2s; }
-.card-produto:nth-child(5) { animation-delay: 0.25s; }
-.card-produto:nth-child(6) { animation-delay: 0.3s; }
-.card-produto:nth-child(7) { animation-delay: 0.35s; }
-.card-produto:nth-child(8) { animation-delay: 0.4s; }
-.card-produto:nth-child(9) { animation-delay: 0.45s; }
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.acessibilidade-bar button:hover,
+.acessibilidade-bar button:focus {
+    background-color: var(--caramelo);
+    color: var(--branco);
+    border-color: var(--caramelo);
+    box-shadow: 0 3px 10px rgba(201, 138, 61, 0.35);
 }
 
-/* Link de "Pular para conteúdo" (acessibilidade) - fica invisível até receber foco via Tab */
+/* ==========================================================================
+   LINK "PULAR PARA O CONTEÚDO" (acessibilidade)
+   ========================================================================== */
 .skip-link {
     position: absolute;
     top: -100%;
     left: 10px;
-    background: #5e3f1f;
-    color: white;
+    background: var(--marrom);
+    color: var(--branco);
     padding: 10px 20px;
     border-radius: 0 0 8px 8px;
     z-index: 10000;
@@ -135,161 +180,198 @@
     border-bottom: 2px solid #ffc107;
 }
 
-/* O asterisco (*) significa "Reset": aplica as regras a absolutamente TODOS os elementos da página */
-* {
-    margin: 0;              /* Remove as margens padrão que os navegadores colocam sozinhos */
-    padding: 0;             /* Remove o espaçamento interno padrão de todos os elementos */
-    box-sizing: border-box; /* O "pulo do gato": faz com que o padding e a borda não aumentem o tamanho total do elemento */
-    font-family: 'Segoe UI', sans-serif; /* Define a fonte padrão do site (Segoe UI se houver no PC, se não, usa sans-serif) */
-}
-
-/* Regras para o corpo/fundo de toda a página */
-body {
-    margin: 0;
-    min-height: 100vh;
-    background: linear-gradient(to bottom, rgb(221, 198, 174), rgb(229, 212, 194)); /* Define a cor de fundo do site */
-    color: #4a4a4a;                       /* Define a cor padrão de todos os textos como um cinza escuro elegante */
-}
-
-/* Regras para o cabeçalho (o topo do seu site) */
-header {
-    /* ALTERADO: Aplicado o degradê angular usando os tons mais escuros da sua paleta do Adobe Color */
-    background: linear-gradient(135deg, #5e3f1f, #331E08);
-    text-align: center;                  /* Centraliza todos os textos (h1 e p) que estão dentro do cabeçalho */
-    padding: 30px 15px;                  /* Cria um espaço de 30px em cima/baixo e 15px nas laterais para o cabeçalho respirar */
-    border-bottom-left-radius: 20px;     /* Arredonda o canto inferior esquerdo do cabeçalho */
-    border-bottom-right-radius: 20px;    /* Arredonda o canto inferior direito do cabeçalho */
-}
-
-/* Regras específicas para o título principal (Nome da Confeitaria) dentro do cabeçalho */
-header h1 {
-    color: rgb(221, 115, 115); /* Define a cor do título como o tom rosa/marrom */
-    font-size: 1.8rem;       /* Define o tamanho da fonte do título principal */
-    margin-bottom: 5px;     /* Cria uma margem de 5px embaixo do título para desgrudar do slogan */
-    text-shadow: 2px 2px 4px rgba(102, 40, 40, 0.664);
-}
-
-/* Regras específicas para o parágrafo (slogan ou descrição) dentro do cabeçalho */
-header p {
-    color: white;         /* Define a cor do texto do slogan como branco */
-    font-size: 0.9rem;    /* Deixa o tamanho da fonte do slogan um pouco menor que o padrão */
-    font-style: italic;   /* Deixa o texto em itálico (inclinado) */
-}
-
-/* Centraliza o conteúdo na tela do computador para simular o tamanho de um celular */
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL E CATEGORIAS
+   ========================================================================== */
 main {
     max-width: 600px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 12px 12px 90px;
 }
 
-/* Títulos das Categorias (Doces e bolos, Salgados, Bebidas) */
+.categoria {
+    margin-top: 24px;
+}
+
 h2 {
-    color: #4a2c11;
-    border-bottom: 2px solid #cfb095;
-    padding-bottom: 5px;
-    margin-top: 30px;
-    font-size: 1.4rem;
-}
-
-/* Container que organizes os cards um embaixo do outro */
-.container-produtos {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 15px;
+    align-items: center;
+    position: relative;
+    color: var(--marrom-escuro);
+    font-family: var(--fonte-titulo);
+    font-size: 1.3rem;
+    padding-bottom: 8px;
+    margin-bottom: 2px;
+    letter-spacing: 0.3px;
 }
 
-/* ADICIONADO: Mostra o aviso "em breve" se a lista do JavaScript estiver vazia */
+h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 64px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--caramelo), var(--rosa-destaque));
+}
+
+/* Ícones elegantes das categorias (sem tocar no HTML) */
+#titulo-doces::before { content: "🍰"; margin-right: 10px; }
+#titulo-salgados::before { content: "🥟"; margin-right: 10px; }
+#titulo-bebidas::before { content: "🥤"; margin-right: 10px; }
+#titulo-hamburgueres::before { content: "🍔"; margin-right: 10px; }
+
+/* Grade de produtos: 1 coluna no celular, 2 colunas no computador */
+.container-produtos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+/* Aviso quando a lista do JavaScript estiver vazia */
 .container-produtos:not(:has(.card-produto))::before {
     content: "Novidades deliciosas chegando em breve! ✨";
-    color: #7a665a;
+    color: var(--texto-suave);
     font-style: italic;
     font-size: 0.9rem;
     padding: 10px 5px;
     display: block;
 }
 
-/* A caixinha do Card do Produto (coloca foto na esquerda e textos na direita) */
+/* ==========================================================================
+   CARDS DE PRODUTOS
+   ========================================================================== */
 .card-produto {
     display: flex;
-    background-color: #ffffff;
-    border-radius: 12px;
+    background-color: var(--branco);
+    border-radius: var(--raio-card);
+    border: 1px solid rgba(94, 63, 31, 0.07);
     overflow: hidden;
-    padding: 12px;
-    gap: 15px;
+    padding: 10px;
+    gap: 12px;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra leve para dar elegância */
+    box-shadow: var(--sombra-card);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    animation: fadeInUp 0.4s ease both;
+}
+.card-produto:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-card-hover);
+    border-color: rgba(201, 138, 61, 0.45);
 }
 
-/* RESOLUÇÃO DA IMAGEM: Força a foto a ficar pequena e proporcional dentro do card */
+.card-produto:nth-child(1) { animation-delay: 0.05s; }
+.card-produto:nth-child(2) { animation-delay: 0.1s; }
+.card-produto:nth-child(3) { animation-delay: 0.15s; }
+.card-produto:nth-child(4) { animation-delay: 0.2s; }
+.card-produto:nth-child(5) { animation-delay: 0.25s; }
+.card-produto:nth-child(6) { animation-delay: 0.3s; }
+.card-produto:nth-child(7) { animation-delay: 0.35s; }
+.card-produto:nth-child(8) { animation-delay: 0.4s; }
+.card-produto:nth-child(9) { animation-delay: 0.45s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .img-produto {
-    width: 100px;
-    height: 100px;
-    flex-shrink: 0;    /* Evita que o navegador esmague a foto */
-    object-fit: cover; /* Recorta a foto proporcionalmente sem distorcer */
-    border-radius: 8px;
+    width: 84px;
+    height: 84px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(59, 36, 16, 0.18);
+    transition: transform 0.3s ease;
+}
+.card-produto:hover .img-produto {
+    transform: scale(1.05);
 }
 
-/* Bloco que guarda os textos e o botão à direita da foto */
 .detalhes-produto {
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-width: 0;
 }
 
-/* Nome do produto */
 .detalhes-produto h3 {
-    margin: 0 0 4px 0;
-    color: #333333;
-    font-size: 1.1rem;
+    margin: 0 0 3px 0;
+    color: #33261a;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.25;
 }
 
-/* Descrição do doce */
 .descricao {
     margin: 0 0 8px 0;
-    color: #666666;
-    font-size: 0.85rem;
-    line-height: 1.3;
+    color: var(--texto-suave);
+    font-size: 0.82rem;
+    line-height: 1.4;
 }
 
-/* Preço */
+/* Preço em "chip" caramelado para chamar atenção */
 .preco {
-    font-weight: bold;
-    color: #4a2c11;
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    font-weight: 800;
+    color: var(--caramelo-escuro);
+    background: linear-gradient(135deg, #fdf3e2, #f7e6c8);
+    border: 1px solid rgba(201, 138, 61, 0.35);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.95rem;
     margin: 0 0 8px 0;
-    font-size: 1.1rem;
 }
 
-/* O Botão elegante e responsivo */
+/* Botão "Adicionar" com toque de caramelo/verde */
 .btn-whatsapp {
-    display: inline-block;        
-    background-color: #25D366;    /* Verde oficial do WhatsApp */
-    color: #FFFFFF;               /* Letras brancas */
-    text-align: center;           
-    padding: 8px 16px;            /* Deixa o botão gordinho */
-    text-decoration: none;        /* Remove o sublinhado de link */
-    font-weight: bold;            /* Texto em negrito */
-    border-radius: 25px;          /* Cantos bem arredondados */
-    font-size: 0.8rem;
-    align-self: flex-start;       /* Faz o botão ocupar apenas o tamanho do seu texto */
+    display: inline-block;
+    background: linear-gradient(135deg, #2dd969, var(--verde-whats-escuro));
+    color: var(--branco);
+    text-align: center;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.78rem;
+    border-radius: 999px;
+    align-self: flex-start;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;  /* Transição suave ao passar o mouse */
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
-/* Efeito ao passar o mouse ou o dedo no botão */
 .btn-whatsapp:hover {
-    background-color: #128C7E;    /* Verde mais escuro */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.45);
+    filter: brightness(1.05);
 }
 
-/* Configurações do Rodapé da página */
+.btn-whatsapp:active {
+    transform: scale(0.96);
+}
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
 footer {
     text-align: center;
-    padding: 25px;
-    color: #555555;
-    font-size: 0.85rem;
-    margin-top: 40px;
+    padding: 22px 15px;
+    color: var(--texto-suave);
+    font-size: 0.82rem;
+    margin-top: 36px;
+    border-top: 1px solid rgba(94, 63, 31, 0.15);
+    background: rgba(255, 255, 255, 0.35);
 }
 
 footer p {
@@ -297,9 +379,8 @@ footer p {
 }
 
 /* ==========================================================================
-   ELEMENTOS DO NOVO CARRINHO DE COMPRAS
+   CARRINHO FIXO (botão inferior)
    ========================================================================== */
-
 .escondido {
     display: none !important;
 }
@@ -310,83 +391,126 @@ footer p {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 570px;
-    padding: 0 15px;
+    max-width: 540px;
+    padding: 0 12px;
     z-index: 999;
 }
 
 #btn-ver-carrinho {
     width: 100%;
-    /* ALTERADO: Aplicado o mesmo degradê do cabeçalho para criar unidade visual */
-    background: linear-gradient(135deg, #573B1E, #331E08);
-    color: white;
+    background: linear-gradient(135deg, #573b1e, #331e08);
+    color: var(--branco);
     border: none;
-    padding: 15px;
-    font-size: 1.1rem;
+    padding: 12px;
+    font-size: 1.05rem;
     font-weight: bold;
-    border-radius: 30px;
+    border-radius: 999px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: background-color 0.2s;
+    box-shadow: 0 8px 22px rgba(51, 30, 8, 0.45);
+    transition: filter 0.2s ease, transform 0.2s ease;
+    animation: subirBotao 0.35s ease;
 }
 
 #btn-ver-carrinho:hover {
-    /* Efeito de hover sutil usando filtro de brilho, já que degradês fixos não aceitam transição simples de cor */
     filter: brightness(1.2);
+    transform: translateY(-2px);
 }
 
-/* Modal / Tela de fundo escurecido */
+@keyframes subirBotao {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   MODAL DO CARRINHO
+   ========================================================================== */
 .modal {
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(43, 26, 10, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     padding: 20px;
+    animation: aparecerFundo 0.25s ease;
+}
+
+@keyframes aparecerFundo {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .modal-conteudo {
-    background-color: white;
-    padding: 25px;
-    border-radius: 15px;
+    background-color: var(--branco);
+    padding: 22px;
+    border-radius: 20px;
     width: 100%;
     max-width: 450px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 60px rgba(43, 26, 10, 0.45);
+    animation: subirModal 0.3s ease;
+}
+
+@keyframes subirModal {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .modal-conteudo h2 {
     margin-top: 0;
     margin-bottom: 15px;
-    /* ALTERADO: Atualizada a borda do título do modal com o tom marrom escuro da paleta */
-    border-bottom: 2px solid #573B1E;
-    padding-bottom: 8px;
+    border-bottom: 2px solid var(--caramelo);
+    padding-bottom: 10px;
+    font-size: 1.35rem;
 }
 
 #itens-carrinho {
     max-height: 250px;
     overflow-y: auto;
     margin-bottom: 15px;
+    padding-right: 4px;
+}
+
+#itens-carrinho::-webkit-scrollbar {
+    width: 6px;
+}
+#itens-carrinho::-webkit-scrollbar-thumb {
+    background: #d9c3a5;
+    border-radius: 6px;
 }
 
 .item-lista-carrinho {
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #f0e4d3;
     font-size: 0.95rem;
+    color: var(--texto);
 }
 
 .total-carrinho {
     text-align: right;
     margin-top: 15px;
-    font-size: 1.2rem;
-    /* ALTERADO: Cor do preço total atualizada para o marrom escuro */
-    color: #573B1E;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--caramelo-escuro);
 }
 
 .modal-botoes {
@@ -398,26 +522,28 @@ footer p {
 
 .modal-botoes button {
     padding: 14px;
-    border-radius: 25px;
+    border-radius: 999px;
     border: none;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    transition: filter 0.2s;
+    transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .modal-botoes button:hover {
-    filter: brightness(0.9);
+    filter: brightness(0.92);
+    transform: translateY(-1px);
 }
 
 .btn-fechar {
-    background-color: #eee;
-    color: #333;
+    background-color: #f2ede6;
+    color: #4a4238;
 }
 
 .btn-enviar-whats {
-    background-color: #25D366;
-    color: white;
+    background: linear-gradient(135deg, #2dd969, var(--verde-whats-escuro));
+    color: var(--branco);
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
 }
 
 /* Botão de remover item dentro do carrinho */
@@ -426,153 +552,283 @@ footer p {
     border: none;
     cursor: pointer;
     font-size: 0.9rem;
-    padding: 2px 5px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
+    padding: 4px 7px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .btn-remover-item:hover {
-    background-color: rgba(255, 0, 0, 0.1); /* Dá um fundinho vermelho leve ao passar o mouse */
-}
-
-/* Barra de Acessibilidade */
-.acessibilidade-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  padding: 8px 16px;
-  background-color: #ee8d9a;
-  font-size: 0.9rem;
-}
-
-.acessibilidade-bar button {
-  background-color: #fdfdfd;
-  border: 1px solid #dfdede;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.acessibilidade-bar button:hover,
-.acessibilidade-bar button:focus {
-  background-color: #007bff;
-  color: #ffffff;
-  border-color: #0056b3;
-}
-
-/* Troque 'body' por 'html' para que as unidades 'rem' funcionem corretamente */
-html {
-  font-size: 100%; /* Tamanho base de referência */
-  transition: font-size 0.2s ease;
-}
-
-/* Estilização da Barra de Acessibilidade */
-.acessibilidade-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 8px 16px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
-  font-size: 0.85rem;
-}
-
-.controle-fonte, .controle-cor {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.acessibilidade-bar button {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  padding: 5px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #333333;
-}
-
-.acessibilidade-bar button:hover {
-  background-color: #007bff;
-  color: #ffffff;
-  border-color: #0056b3;
+    background-color: rgba(217, 112, 112, 0.18);
+    transform: scale(1.1);
 }
 
 /* ==========================================================================
-   PALETA DE ALTO CONTRASTE / MODO DALTÔNICO (WCAG AAA)
+   BOTÃO VOLTAR AO TOPO E WHATSAPP FLUTUANTE
    ========================================================================== */
-body.modo-daltonico {
-  background: #121212 !important; /* Fundo escuro absoluto */
-  color: #ffffff !important;
+.btn-topo {
+    position: fixed;
+    bottom: 80px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #573b1e, #331e08);
+    color: var(--branco);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(43, 26, 10, 0.35);
+    z-index: 997;
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+.btn-topo:hover {
+    transform: scale(1.12);
+    filter: brightness(1.15);
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 80px;
+    right: 15px;
+    background: linear-gradient(135deg, #2dd969, #1da851);
+    color: var(--branco);
+    padding: 12px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    z-index: 998;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: pulse-whats 2.5s infinite;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 26px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-icon {
+    font-size: 1.3rem;
+}
+
+@keyframes pulse-whats {
+    0%, 100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45); }
+    50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7); }
+}
+
+/* ==========================================================================
+   LAYOUT RESPONSIVO (celular / computador)
+   ========================================================================== */
+@media (max-width: 420px) {
+    .img-produto {
+        width: 76px;
+        height: 76px;
+    }
+    .detalhes-produto h3 {
+        font-size: 0.98rem;
+    }
+    .whatsapp-text {
+        display: none;
+    }
+}
+
+@media (min-width: 700px) {
+    main {
+        max-width: 940px;
+    }
+    .container-produtos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .img-produto {
+        width: 104px;
+        height: 104px;
+    }
+    header {
+        padding: 32px 16px;
+    }
+    header h1 {
+        font-size: 2.3rem;
+    }
+    .whatsapp-float {
+        bottom: 30px;
+        right: 30px;
+    }
+    .btn-topo {
+        bottom: 30px;
+        left: 30px;
+    }
+    #carrinho-fixo {
+        max-width: 600px;
+    }
+}
+
+/* Reduz animações para quem prefere movimento reduzido (acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Foco visível para navegação por teclado (acessibilidade) */
+:focus-visible {
+    outline: 3px solid var(--caramelo);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   PALETA DE ALTO CONTRASTE / MODO DALTÔNICO (WCAG AA + AAA)
+   Regras WCAG aplicadas:
+   - Fundo escuro #121212 + texto branco puro (contraste ≈ 18,7:1, AAA).
+   - Destaques em amarelo #ffcc00 (≈ 12,4:1 sobre o fundo escuro, AAA).
+   - CTAs em azul cobalto #0032cc + texto branco (≈ 9,0:1, AAA).
+   - Amarelo e azul cobalto são distinguíveis por protanopia,
+     deuteranopia e tritanopia (sem depender de verde/vermelho).
+   - O título "Confeitaria Norske" mantém as CORES ORIGINAIS intactas
+     (#dd7373 sobre #1e1e1e ≈ 5,4:1 — acima do mínimo 4,5:1 exigido para
+     texto grande AAA). Nenhuma regra neste bloco sobrescreve o h1.
+   - A escala compacta (tamanhos, espaçamentos, fontes) é mantida.
+   ========================================================================== */
+
+/* Base: fundo quase preto + texto branco puro (17,9:1) */
+body.modo-daltonico {
+    background: #121212 !important;
+    color: #ffffff !important;
+}
+
+/* Superfícies escuras (cabeçalho, barra de informações, botões fixos) */
 body.modo-daltonico header,
 body.modo-daltonico .info-bar,
 body.modo-daltonico #btn-ver-carrinho,
 body.modo-daltonico .btn-topo {
-  background: #1e1e1e !important;
-  border: 1px solid #ffcc00 !important;
+    background: #1e1e1e !important;
+    border: 1px solid #ffcc00 !important;
 }
 
-body.modo-daltonico header h1 {
-  color: #ffcc00 !important; /* Amarelo universal de alto contraste */
-  text-shadow: none !important;
+/* Barra de acessibilidade escura (o rótulo "Texto:" herda branco e fica legível) */
+body.modo-daltonico .acessibilidade-bar {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border-bottom-color: #3a3a3a !important;
 }
 
+/* Botões da barra: chips brancos com texto preto (contraste máxima) */
+body.modo-daltonico .acessibilidade-bar button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+}
+body.modo-daltonico .acessibilidade-bar button:hover,
+body.modo-daltonico .acessibilidade-bar button:focus {
+    background-color: #ffcc00 !important;
+    color: #000000 !important;
+    border-color: #ffcc00 !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Botão "Daltonismo / Contraste": fica sempre destacado quando ativo */
+body.modo-daltonico #btn-daltonico {
+    background-color: #ffcc00 !important;
+    color: #000000 !important;
+    border-color: #ffcc00 !important;
+}
+
+/* Títulos de categoria em amarelo de alta visibilidade */
 body.modo-daltonico h2 {
-  color: #ffcc00 !important;
-  border-bottom-color: #ffcc00 !important;
+    color: #ffcc00 !important;
+    border-bottom-color: #ffcc00 !important;
+}
+
+body.modo-daltonico h2::after {
+    background: #ffcc00 !important;
 }
 
 body.modo-daltonico .card-produto {
-  background-color: #1e1e1e !important;
-  border: 1px solid #444444 !important;
+    background-color: #1e1e1e !important;
+    border: 1px solid #3a3a3a !important;
+}
+body.modo-daltonico .card-produto:hover {
+    border-color: #ffcc00 !important;
 }
 
 body.modo-daltonico .detalhes-produto h3 {
-  color: #ffffff !important;
+    color: #ffffff !important;
 }
 
 body.modo-daltonico .descricao {
-  color: #cccccc !important;
+    color: #d4d4d4 !important;
 }
 
 body.modo-daltonico .preco {
-  color: #ffcc00 !important;
+    color: #ffcc00 !important;
+    background: transparent !important;
+    border-color: transparent !important;
 }
 
-/* Botões do WhatsApp e Ações usam Azul Cobalto de alto contraste (evita confusão verde/vermelho) */
+/* Aviso de lista vazia legível sobre o fundo escuro */
+body.modo-daltonico .container-produtos:not(:has(.card-produto))::before {
+    color: #d4d4d4 !important;
+}
+
+/* CTAs usam azul cobalto + branco (9,0:1) — cores seguras para daltônicos.
+   Usa o atalho "background" (não apenas background-color) para remover
+   também o gradiente verde original, garantindo azul puro em todos os
+   botões de ação do WhatsApp. */
 body.modo-daltonico .btn-whatsapp,
 body.modo-daltonico .whatsapp-float,
 body.modo-daltonico .btn-enviar-whats {
-  background-color: #0055ff !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 10px rgba(0, 85, 255, 0.4) !important;
+    background: #0032cc !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0, 50, 204, 0.45) !important;
 }
 
 body.modo-daltonico .modal-conteudo {
-  background-color: #1e1e1e !important;
-  color: #ffffff !important;
-  border: 2px solid #ffcc00 !important;
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 2px solid #ffcc00 !important;
 }
 
+/* Itens do carrinho com texto branco (antes ficavam escuros e ilegíveis) */
 body.modo-daltonico .item-lista-carrinho {
-  border-bottom-color: #333333 !important;
+    color: #ffffff !important;
+    border-bottom-color: #3a3a3a !important;
 }
 
 body.modo-daltonico .total-carrinho {
-  color: #ffcc00 !important;
+    color: #ffcc00 !important;
 }
 
-body.modo-daltonico #btn-daltonico {
-  background-color: #ffcc00 !important;
-  color: #000000 !important;
-  border-color: #ffcc00 !important;
+/* Botão "Continuar Comprando" em fundo escuro para manter o tema */
+body.modo-daltonico .btn-fechar {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    border: 1px solid #ffcc00 !important;
+}
+
+/* Rodapé: fundo transparente + texto claro (antes perdia contraste) */
+body.modo-daltonico footer {
+    background: transparent !important;
+    color: #d4d4d4 !important;
+    border-top-color: #3a3a3a !important;
+}
+
+/* Barra de rolagem do carrinho com tom acessível ao fundo escuro */
+body.modo-daltonico #itens-carrinho::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+}
+
+body.modo-daltonico ::selection {
+    background: #ffcc00 !important;
+    color: #121212 !important;
+}
+
+/* Foco visível em amarelo para navegação por teclado no modo daltônico */
+body.modo-daltonico :focus-visible {
+    outline-color: #ffcc00 !important;
 }
