@@ -1,5 +1,6 @@
-.vercel
-.env*
-backend/venv/
-backend/confeitaria.db
-backend/__pycache__/
+# Ambientes virtuais e cache
+venv/
+__pycache__/
+.env.local
+.vercel/
+*.db
