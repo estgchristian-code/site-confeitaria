@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from sqlmodel import Field, SQLModel, Session, create_engine
 import os
 
@@ -15,10 +16,14 @@ else:
 caminho_atual = os.path.dirname(os.path.abspath(__file__))
 pem_path = os.path.join(caminho_atual, "isrgrootx1.pem")
 
-engine = create_engine(
-    URL_BANCO, 
-    connect_args={"ssl": {"ca": pem_path}}
-)
+if URL_BANCO:
+    engine = create_engine(
+        URL_BANCO,
+        connect_args={"ssl": {"ca": pem_path}},
+    )
+else:
+    engine = None
+    print("Aviso: DATABASE_URL nao configurada no ambiente da Vercel")
 
 # 3. O Molde da nossa tabela de Pedidos
 class Pedido(SQLModel, table=True):
@@ -30,10 +35,11 @@ class Pedido(SQLModel, table=True):
     valor: float
 
 # 4. Cria as tabelas no TiDB Cloud
-try:
-    SQLModel.metadata.create_all(engine)
-except Exception as e:
-    print(f"Aviso ao criar tabelas: {e}")
+if engine is not None:
+    try:
+        SQLModel.metadata.create_all(engine)
+    except Exception as e:
+        print(f"Aviso ao criar tabelas: {e}")
 
 # 5. Inicia o FastAPI
 app = FastAPI()
