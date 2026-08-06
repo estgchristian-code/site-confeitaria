@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Confeitaria Norske - Login</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="icon" href="../imagens/logo-norske-3.ico" type="image/x-icon">
+</head>
+<body>
+
+    <main class="pagina-login" role="main">
+        <div class="cartao-login">
+            <h1>Confeitaria Norske</h1>
+            <p class="subtitulo-login">Painel Administrativo</p>
+
+            <form id="form-login" novalidate>
+                <div class="campo-formulario">
+                    <label for="campo-email">E-mail</label>
+                    <input type="email" id="campo-email" name="email" autocomplete="email" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="campo-senha">Senha</label>
+                    <input type="password" id="campo-senha" name="senha" autocomplete="current-password" required>
+                </div>
+
+                <p id="erro-login" class="erro-login" role="alert"></p>
+
+                <button type="submit" id="botao-entrar" class="botao botao-primario botao-largo">Entrar</button>
+            </form>
+
+            <a href="../index.html" class="link-voltar">← Voltar ao cardápio</a>
+        </div>
+    </main>
+
+    <!-- Mapas dos módulos do Firebase SDK (mesma versão do package.json) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "firebase/app": "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js",
+            "firebase/firestore": "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js",
+            "firebase/auth": "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js",
+            "firebase/storage": "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js"
+        }
+    }
+    </script>
+    <script type="module" src="../js/admin/login.js"></script>
+</body>
+</html>

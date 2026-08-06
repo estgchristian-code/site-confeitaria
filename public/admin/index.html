@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Confeitaria Norske - Administração</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="icon" href="../imagens/logo-norske-3.ico" type="image/x-icon">
+</head>
+<body>
+
+    <header class="cabecalho-admin" role="banner">
+        <div class="cabecalho-admin-conteudo">
+            <div>
+                <h1>Confeitaria Norske</h1>
+                <p class="subtitulo-cabecalho">Painel Administrativo</p>
+            </div>
+            <div class="sessao-admin">
+                <span class="usuario-logado" id="usuario-logado"></span>
+                <button type="button" id="btn-sair" class="botao botao-secundario">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="painel" role="main">
+
+        <section class="barra-acoes" aria-label="Ações do painel">
+            <input type="search" id="campo-pesquisa" class="campo-pesquisa"
+                   placeholder="Buscar produto por nome ou categoria..."
+                   aria-label="Buscar produto">
+            <button type="button" id="btn-novo-produto" class="botao botao-primario">+ Novo Produto</button>
+        </section>
+
+        <section id="lista-produtos" class="lista-produtos" aria-label="Lista de produtos"></section>
+
+    </main>
+
+    <!-- Modal: formulário de produto (novo / edição) -->
+    <div id="modal-produto" class="modal" role="dialog" aria-modal="true" aria-label="Formulário de produto">
+        <div class="modal-caixa">
+            <div class="modal-cabecalho">
+                <h2 id="titulo-modal-produto">Novo Produto</h2>
+                <button type="button" id="btn-fechar-modal-produto" class="botao-fechar" aria-label="Fechar">×</button>
+            </div>
+
+            <form id="form-produto" novalidate>
+                <div class="campo-formulario">
+                    <label for="campo-nome">Nome *</label>
+                    <input type="text" id="campo-nome" name="nome" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="campo-descricao">Descrição</label>
+                    <textarea id="campo-descricao" name="descricao" rows="3"></textarea>
+                </div>
+
+                <div class="linha-campos">
+                    <div class="campo-formulario">
+                        <label for="campo-preco">Preço (R$) *</label>
+                        <input type="number" id="campo-preco" name="preco" min="0" step="0.01"
+                               inputmode="decimal" required>
+                    </div>
+
+                    <div class="campo-formulario">
+                        <label for="campo-categoria">Categoria *</label>
+                        <select id="campo-categoria" name="categoria" required>
+                            <option value="Doces e bolos">Doces e bolos</option>
+                            <option value="Salgados">Salgados</option>
+                            <option value="Bebidas">Bebidas</option>
+                            <option value="Hambúrgueres">Hambúrgueres</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="campo-imagem">Imagem</label>
+                    <input type="file" id="campo-imagem" name="imagem" accept="image/*">
+                    <p class="ajuda-campo">A imagem é enviada ao Firebase Storage. Se não escolher, a atual é mantida.</p>
+                    <img id="preview-imagem" class="preview-imagem escondido" alt="Pré-visualização da imagem">
+                </div>
+
+                <div class="campo-formulario linha-status">
+                    <label for="campo-status">Status</label>
+                    <input type="checkbox" id="campo-status" name="status" checked>
+                    <span class="texto-status">Ativo (visível no cardápio)</span>
+                </div>
+
+                <div class="modal-botoes">
+                    <button type="button" id="btn-cancelar-produto" class="botao botao-secundario">Cancelar</button>
+                    <button type="submit" id="botao-salvar" class="botao botao-primario">Salvar Produto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: confirmação de exclusão -->
+    <div id="modal-confirmar" class="modal" role="dialog" aria-modal="true" aria-label="Confirmação de exclusão">
+        <div class="modal-caixa modal-pequena">
+            <h2>Excluir produto</h2>
+            <p class="texto-confirmacao">
+                Tem certeza que deseja excluir este produto?<br>
+                <strong id="nome-produto-excluir"></strong>
+            </p>
+            <div class="modal-botoes">
+                <button type="button" id="btn-cancelar-excluir" class="botao botao-secundario">Cancelar</button>
+                <button type="button" id="botao-confirmar-excluir" class="botao botao-perigo">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="area-toasts" class="area-toasts" aria-live="polite"></div>
+
+    <!-- Mapas dos módulos do Firebase SDK (mesma versão do package.json) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "firebase/app": "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js",
+            "firebase/firestore": "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js",
+            "firebase/auth": "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js",
+            "firebase/storage": "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js"
+        }
+    }
+    </script>
+    <script type="module" src="../js/admin/admin.js"></script>
+</body>
+</html>

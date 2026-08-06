@@ -1,0 +1,226 @@
+[
+    {
+        "nome": "Ninho com Nutella",
+        "descricao": "Camadas de creme de Leite Ninho com Nutella. 250g.",
+        "preco": 12,
+        "categoria": "doces",
+        "imagem": "imagens/ninho-nutella.png",
+        "ativo": true
+    },
+    {
+        "nome": "Sensação",
+        "descricao": "Chocolate com morango. 250g.",
+        "preco": 11,
+        "categoria": "doces",
+        "imagem": "imagens/bolo-sensacao.png",
+        "ativo": true
+    },
+    {
+        "nome": "Bolo de Cenoura",
+        "descricao": "Bolo de cenoura com calda de brigadeiro.",
+        "preco": 15,
+        "categoria": "doces",
+        "imagem": "imagens/bolo-cenoura.png",
+        "ativo": true
+    },
+    {
+        "nome": "Coxinha",
+        "descricao": "Kit com 10 coxinhas artesanais e super temperadas. 340g.",
+        "preco": 17,
+        "categoria": "salgados",
+        "imagem": "imagens/coxinha.png",
+        "ativo": true
+    },
+    {
+        "nome": "Kit Salgadinhos",
+        "descricao": "Kit com 12 salgadinhos, incluindo coxinha, bolinha de queijo e risoles de carne. 350g.",
+        "preco": 15,
+        "categoria": "salgados",
+        "imagem": "imagens/kit-salgadinhos.png",
+        "ativo": true
+    },
+    {
+        "nome": "Coca-Cola Lata",
+        "descricao": "Coca orig. 350ml.",
+        "preco": 7,
+        "categoria": "bebidas",
+        "imagem": "imagens/coca.png",
+        "ativo": true
+    },
+    {
+        "nome": "Coca-Cola Lata Zero",
+        "descricao": "Coca zero 350ml.",
+        "preco": 7,
+        "categoria": "bebidas",
+        "imagem": "imagens/coca-zero.png",
+        "ativo": true
+    },
+    {
+        "nome": "Pepsi Lata",
+        "descricao": "Pepsi orig. 350ml.",
+        "preco": 7,
+        "categoria": "bebidas",
+        "imagem": "imagens/pepsi.png",
+        "ativo": true
+    },
+    {
+        "nome": "Refrigerante Guaraná",
+        "descricao": "Guaraná Antártica orig. 350ml.",
+        "preco": 7,
+        "categoria": "bebidas",
+        "imagem": "imagens/guarana.png",
+        "ativo": true
+    },
+    {
+        "nome": "Refrigerante Guaraná Zero",
+        "descricao": "Guaraná Antártica zero. 350ml.",
+        "preco": 7,
+        "categoria": "bebidas",
+        "imagem": "imagens/guarana-zero.png",
+        "ativo": true
+    },
+    {
+        "nome": "Sprite Lata",
+        "descricao": "Sprite original 350ml.",
+        "preco": 7,
+        "categoria": "bebidas",
+        "imagem": "imagens/sprite.png",
+        "ativo": true
+    },
+    {
+        "nome": "Coca-Cola 2L",
+        "descricao": "Coca 2L.",
+        "preco": 15,
+        "categoria": "bebidas",
+        "imagem": "imagens/coca-cola.png",
+        "ativo": true
+    },
+    {
+        "nome": "Pepsi 2L",
+        "descricao": "Pepsi 2L.",
+        "preco": 15,
+        "categoria": "bebidas",
+        "imagem": "imagens/pepsi2l.png",
+        "ativo": true
+    },
+    {
+        "nome": "Guaraná 2L",
+        "descricao": "Guaraná 2L.",
+        "preco": 14,
+        "categoria": "bebidas",
+        "imagem": "imagens/guarana2l.png",
+        "ativo": true
+    },
+    {
+        "nome": "Sprite 2L",
+        "descricao": "Sprite 2L.",
+        "preco": 13,
+        "categoria": "bebidas",
+        "imagem": "imagens/sprite2L.png",
+        "ativo": true
+    },
+    {
+        "nome": "Água sem Gás",
+        "descricao": "Água s/ gás cristal azul 500ml.",
+        "preco": 4,
+        "categoria": "bebidas",
+        "imagem": "imagens/agua-sem-gas.png",
+        "ativo": true
+    },
+    {
+        "nome": "Água com Gás",
+        "descricao": "Água c/ gás Font Life 500ml.",
+        "preco": 4,
+        "categoria": "bebidas",
+        "imagem": "imagens/agua-com-gas.png",
+        "ativo": true
+    },
+    {
+        "nome": "Chá Matte Leão",
+        "descricao": "Chá matte leão orig. Copo 300ml.",
+        "preco": 7,
+        "categoria": "bebidas",
+        "imagem": "imagens/cha-mate.png",
+        "ativo": true
+    },
+    {
+        "nome": "Monster Lata",
+        "descricao": "Monster 473ml.",
+        "preco": 13,
+        "categoria": "bebidas",
+        "imagem": "imagens/monster.png",
+        "ativo": true
+    },
+    {
+        "nome": "X-Burguer",
+        "descricao": "Pão, maionese, 90g de hambúrguer caseiro, mussarela.",
+        "preco": 11,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-burguer.png",
+        "ativo": true
+    },
+    {
+        "nome": "X-Salada",
+        "descricao": "Pão, maionese, 90g de hambúrguer caseiro, mussarela, presunto, alface e tomate.",
+        "preco": 12,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-salada.png",
+        "ativo": true
+    },
+    {
+        "nome": "X-Egg",
+        "descricao": "Pão, maionese, 90g de hambúrguer caseiro, ovo, mussarela, presunto, alface e tomate.",
+        "preco": 15,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-egg.png",
+        "ativo": true
+    },
+    {
+        "nome": "X-Calabresa",
+        "descricao": "Pão, maionese, 90g de hambúrguer caseiro, calabresa, mussarela, presunto, alface e tomate.",
+        "preco": 15,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-calabresa02.png",
+        "ativo": true
+    },
+    {
+        "nome": "X-Frango",
+        "descricao": "Pão, maionese, 90g de filé de frango, mussarela, catupiry, alface e tomate.",
+        "preco": 15,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-frango.png",
+        "ativo": true
+    },
+    {
+        "nome": "X-Bacon",
+        "descricao": "Pão, maionese, 90g de hambúrguer caseiro, bacon, mussarela, presunto, alface e tomate.",
+        "preco": 15,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-bacon.png",
+        "ativo": true
+    },
+    {
+        "nome": "X-Tudo",
+        "descricao": "Pão, maionese, 90g de hambúrguer caseiro, filé de frango, calabresa, ovo, bacon mussarela, presunto, alface e tomate.",
+        "preco": 21,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-tudo.png",
+        "ativo": true
+    },
+    {
+        "nome": "X da casa",
+        "descricao": "Pão, maionese, 90g de hambúrguer caseiro, filé de frango, calabresa, ovo, bacon, mussarela, cheddar, batata palha, presunto, alface e tomate.",
+        "preco": 26,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-casa.png",
+        "ativo": true
+    },
+    {
+        "nome": "X-Dog",
+        "descricao": "Pão, maionese, duas vinas, bacon, catupiry, batata palha, farofa, milho, ervilha e tomate.",
+        "preco": 14,
+        "categoria": "hamburgueres",
+        "imagem": "imagens/x-dog.png",
+        "ativo": true
+    }
+]

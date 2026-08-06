@@ -141,6 +141,16 @@
         ]
     }
     </script>
-    <script src="script.js"></script>
+    <!-- Mapas dos módulos do Firebase SDK (mesma versão do package.json) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "firebase/app": "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js",
+            "firebase/firestore": "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js",
+            "firebase/auth": "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js"
+        }
+    }
+    </script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

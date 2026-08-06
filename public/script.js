@@ -1,186 +1,116 @@
 // ==========================================================================
-// 1. LISTA DE PRODUTOS (Altere, adicione ou remova itens aqui!)
+// 1. PRODUTOS (carregados do Firebase Firestore)
 // ==========================================================================
 
-const doces = [
-    {
-        nome: "Ninho com Nutella",
-        descricao: "Camadas de creme de Leite Ninho com Nutella. 250g.",
-        preco: "R$ 12,00",
-        imagem: "imagens/ninho-nutella.png"
-    },
-    {
-        nome: "Sensação",
-        descricao: "Chocolate com morango. 250g.",
-        preco: "R$ 11,00",
-        imagem: "imagens/bolo-sensacao.png"
-    },
-    {
-        nome: "Bolo de Cenoura",
-        descricao: "Bolo de cenoura com calda de brigadeiro.",
-        preco: "R$ 15,00",
-        imagem: "imagens/bolo-cenoura.png"
-    }
-];
+import { db, collection, getDocs, query, where } from "./js/firebase.js";
 
-const salgados = [
-    {
-        nome: "Coxinha",
-        descricao: "Kit com 10 coxinhas artesanais e super temperadas. 340g.",
-        preco: "R$ 17,00",
-        imagem: "imagens/coxinha.png"
-    },
-    {
-        nome: "Kit Salgadinhos",
-        descricao: "Kit com 12 salgadinhos, incluindo coxinha, bolinha de queijo e risoles de carne. 350g.",
-        preco: "R$ 15,00",
-        imagem: "imagens/kit-salgadinhos.png"
-    }
-];
+// Recupera e desenha na tela todos os produtos "ativos" do Firestore,
+// agrupando-os por categoria nos containers existentes no HTML.
+async function carregarProdutos() {
+    const q = query(collection(db, "produtos"), where("ativo", "==", true));
 
-const bebidas = [
-    {
-        nome: "Coca-Cola Lata",
-        descricao: "Coca orig. 350ml.",
-        preco: "R$ 7,00",
-        imagem: "imagens/coca.png"
-    },
-    {
-        nome: "Coca-Cola Lata Zero",
-        descricao: "Coca zero 350ml.",
-        preco: "R$ 7,00",
-        imagem: "imagens/coca-zero.png"
-    },
-    {
-        nome: "Pepsi Lata",
-        descricao: "Pepsi orig. 350ml.",
-        preco: "R$ 7,00",
-        imagem: "imagens/pepsi.png"
-    },
-    {
-        nome: "Refrigerante Guaraná",
-        descricao: "Guaraná Antártica orig. 350ml.",
-        preco: "R$ 7,00",
-        imagem: "imagens/guarana.png"
-    },
-    {
-        nome: "Refrigerante Guaraná Zero",
-        descricao: "Guaraná Antártica zero. 350ml.",
-        preco: "R$ 7,00",
-        imagem: "imagens/guarana-zero.png"
-    },
-    {
-        nome: "Sprite Lata",
-        descricao: "Sprite original 350ml.",
-        preco: "R$ 7,00",
-        imagem: "imagens/sprite.png"
-    },
-    {
-        nome: "Coca-Cola 2L",
-        descricao: "Coca 2L.",
-        preco: "R$ 15,00",
-        imagem: "imagens/coca-cola.png"
-    },
-    {
-        nome: "Pepsi 2L",
-        descricao: "Pepsi 2L.",
-        preco: "R$ 15,00",
-        imagem: "imagens/pepsi2l.png"
-    },
-    {
-        nome: "Guaraná 2L",
-        descricao: "Guaraná 2L.",
-        preco: "R$ 14,00",
-        imagem: "imagens/guarana2l.png"
-    },
-    {
-        nome: "Sprite 2L",
-        descricao: "Sprite 2L.",
-        preco: "R$ 13,00",
-        imagem: "imagens/sprite2L.png"
-    },
-    {
-        nome: "Água sem Gás",
-        descricao: "Água s/ gás cristal azul 500ml.",
-        preco: "R$ 4,00",
-        imagem: "imagens/agua-sem-gas.png"
-    },
-    {
-        nome: "Água com Gás",
-        descricao: "Água c/ gás Font Life 500ml.",
-        preco: "R$ 4,00",
-        imagem: "imagens/agua-com-gas.png"
-    },
-    {
-        nome: "Chá Matte Leão",
-        descricao: "Chá matte leão orig. Copo 300ml.",
-        preco: "R$ 7,00",
-        imagem: "imagens/cha-mate.png"
-    },
-    {
-        nome: "Monster Lata",
-        descricao: "Monster 473ml.",
-        preco: "R$ 13,00",
-        imagem: "imagens/monster.png"
-    }
-];
+    // Mapeamento: valor do campo "categoria" no Firestore -> id do container.
+    // Aceita os nomes das seções ("Doces e bolos", ...) e chaves curtas,
+    // ignorando maiúsculas/minúsculas e acentos.
+    const containersPorCategoria = {
+        "doces": "lista-doces",
+        "doces e bolos": "lista-doces",
+        "salgados": "lista-salgados",
+        "bebidas": "lista-bebidas",
+        "hamburgueres": "lista-hamburgueres",
+        "hamburguers": "lista-hamburgueres",
+        "hamburguer": "lista-hamburgueres"
+    };
 
-const hamburgueres = [
-    {
-        nome: "X-Burguer",
-        descricao: "Pão, maionese, 90g de hambúrguer caseiro, mussarela.",
-        preco: "R$ 11,00",
-        imagem: "imagens/x-burguer.png"
-    },
-    {
-        nome: "X-Salada",
-        descricao: "Pão, maionese, 90g de hambúrguer caseiro, mussarela, presunto, alface e tomate.",
-        preco: "R$ 12,00",
-        imagem: "imagens/x-salada.png"
-    },
-    {
-        nome: "X-Egg",
-        descricao: "Pão, maionese, 90g de hambúrguer caseiro, ovo, mussarela, presunto, alface e tomate.",
-        preco: "R$ 15,00",
-        imagem: "imagens/x-egg.png"
-    },
-    {
-        nome: "X-Calabresa",
-        descricao: "Pão, maionese, 90g de hambúrguer caseiro, calabresa, mussarela, presunto, alface e tomate.",
-        preco: "R$ 15,00",
-        imagem: "imagens/x-calabresa02.png"
-    },
-    {
-        nome: "X-Frango",
-        descricao: "Pão, maionese, 90g de filé de frango, mussarela, catupiry, alface e tomate.",
-        preco: "R$ 15,00",
-        imagem: "imagens/x-frango.png"
-    },
-    {
-        nome: "X-Bacon",
-        descricao: "Pão, maionese, 90g de hambúrguer caseiro, bacon, mussarela, presunto, alface e tomate.",
-        preco: "R$ 15,00",
-        imagem: "imagens/x-bacon.png"
-    },
-    {
-        nome: "X-Tudo",
-        descricao: "Pão, maionese, 90g de hambúrguer caseiro, filé de frango, calabresa, ovo, bacon mussarela, presunto, alface e tomate.",
-        preco: "R$ 21,00",
-        imagem: "imagens/x-tudo.png"
-    },
-    {
-        nome: "X da casa",
-        descricao: "Pão, maionese, 90g de hambúrguer caseiro, filé de frango, calabresa, ovo, bacon, mussarela, cheddar, batata palha, presunto, alface e tomate.",
-        preco: "R$ 26,00",
-        imagem: "imagens/x-casa.png"
-    },
-    {
-        nome: "X-Dog",
-        descricao: "Pão, maionese, duas vinas, bacon, catupiry, batata palha, farofa, milho, ervilha e tomate.",
-        preco: "R$ 14,00",
-        imagem: "imagens/x-dog.png"
+    // Agrupa os produtos carregados por container (seção do cardápio)
+    const produtosPorCategoria = {};
+    for (const id in containersPorCategoria) {
+        produtosPorCategoria[containersPorCategoria[id]] = [];
     }
-];
+
+    try {
+        const consulta = await getDocs(q);
+
+        consulta.forEach(documento => {
+            const dados = documento.data();
+            const idContainer = containersPorCategoria[normalizarCategoria(dados.categoria)];
+
+            if (idContainer) {
+                produtosPorCategoria[idContainer].push({
+                    nome: dados.nome,
+                    descricao: dados.descricao,
+                    preco: formatarPreco(dados.preco),
+                    imagem: normalizarImagem(dados.imagem)
+                });
+            } else {
+                console.warn("Produto com categoria sem seção no site foi ignorado:", dados.nome, "->", dados.categoria);
+            }
+        });
+
+        for (const idContainer in produtosPorCategoria) {
+            renderizarProdutos(produtosPorCategoria[idContainer], idContainer);
+        }
+
+        if (consulta.empty) {
+            console.warn("Nenhum produto ativo encontrado no Firestore.");
+        }
+    } catch (erro) {
+        console.error("Erro ao carregar produtos do Firestore:", erro);
+    }
+}
+
+// Normaliza o valor do campo "categoria" para busca no mapa de containers
+// (remove acentos, caixa alta e espaços extras)
+function normalizarCategoria(valor) {
+    return String(valor || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+}
+
+// Garante que a imagem do produto aponte para um arquivo local relativo
+// ("imagens/<arquivo>"). Funciona com URLs completas do Storage, caminhos
+// absolutos, caminhos relativos ou apenas o nome do arquivo.
+function normalizarImagem(caminho) {
+    // Sem imagem cadastrada: usa o logo local para não quebrar o card
+    if (!caminho) {
+        return "imagens/logo-norske-3.png";
+    }
+
+    let valor = String(caminho);
+
+    // URLs completas (ex.: imagens enviadas pelo painel para o Firebase
+    // Storage) são usadas exatamente como estão
+    if (/^https?:\/\//i.test(valor)) {
+        return valor;
+    }
+
+    // Remove parâmetros de URL (ex.: "?alt=media&token=...")
+    valor = valor.split(/[?#]/)[0];
+
+    // Decodifica caracteres codificados (ex.: "imagens%2Fcoca.png")
+    try {
+        valor = decodeURIComponent(valor);
+    } catch (erro) {
+        // Mantém o valor original se não for uma codificação válida
+    }
+
+    // Extrai somente o nome do arquivo final
+    const nomeArquivo = valor.split("/").pop();
+
+    return `imagens/${nomeArquivo}`;
+}
+
+// Converte o preço numérico (ex.: 12) no formato exibido e usado pelo
+// carrinho (ex.: "R$ 12,00")
+function formatarPreco(valor) {
+    if (valor === null || valor === undefined || isNaN(valor)) {
+        return "R$ 0,00";
+    }
+
+    return `R$ ${Number(valor).toFixed(2).replace(".", ",")}`;
+}
 
 
 // ==========================================================================
@@ -215,11 +145,8 @@ function renderizarProdutos(listaDeProdutos, idDoContainer) {
     });
 }
 
-// Executa a função para cada uma das categorias quando a página carrega
-renderizarProdutos(doces, 'lista-doces');
-renderizarProdutos(salgados, 'lista-salgados');
-renderizarProdutos(bebidas, 'lista-bebidas');
-renderizarProdutos(hamburgueres, 'lista-hamburgueres');
+// Carrega os produtos do Firestore assim que a página abre
+carregarProdutos();
 
 // Restaura o carrinho salvo no navegador (se houver)
 atualizarInterfaceCarrinho();
