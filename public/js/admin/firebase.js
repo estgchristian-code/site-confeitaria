@@ -3,9 +3,13 @@
 // ==========================================================================
 // Ponto central do painel administrativo: reutiliza o app/db/auth já
 // inicializados pelo site e adiciona o Firebase Storage.
+//
+// Nota: os imports usam URLs completas do CDN do Firebase (padrão oficial do
+// SDK modular) em vez de importmap, porque o importmap inline é bloqueado
+// pela Content-Security-Policy do site.
 
 import { app, db, auth } from "../firebase.js";
-import { getStorage } from "firebase/storage";
+import { getStorage } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 const storage = getStorage(app);
 
@@ -25,7 +29,7 @@ export {
     updateDoc,
     deleteDoc,
     onSnapshot
-} from "firebase/firestore";
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 // Storage
 export {
@@ -33,11 +37,11 @@ export {
     uploadBytes,
     getDownloadURL,
     deleteObject
-} from "firebase/storage";
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 // Authentication
 export {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
-} from "firebase/auth";
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
