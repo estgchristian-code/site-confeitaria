@@ -1,0 +1,17 @@
+{
+  "name": "Confeitaria Norske",
+  "short_name": "Norske",
+  "description": "Cardápio online da Confeitaria Norske - Doces, salgados, bebidas e hambúrgueres artesanais.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#5e3f1f",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "imagens/logo-norske-3.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
