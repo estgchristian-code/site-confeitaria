@@ -12,7 +12,8 @@ import {
     alterarStatus,
     excluirProduto
 } from "./products.js";
-import { enviarImagem, excluirImagem } from "./storage.js";
+import { enviarImagem } from "./cloudinary.js";
+import { excluirImagem } from "./storage.js";
 
 const CATEGORIAS = ["Doces e bolos", "Salgados", "Bebidas", "Hambúrgueres"];
 
@@ -201,14 +202,21 @@ async function salvarProduto() {
     }
 
     estado.enviando = true;
-    obterElemento("botao-salvar").disabled = true;
+    const botaoSalvar = obterElemento("botao-salvar");
+    botaoSalvar.disabled = true;
+
+    if (arquivo) {
+        botaoSalvar.textContent = "Enviando imagem...";
+    }
 
     try {
         let imagem = estado.imagemAtual;
 
-        // Envia a nova imagem (se selecionada) e usa a URL no Firestore
+        // Envia a nova imagem (se selecionada) para o Cloudinary e usa a
+        // URL retornada (secure_url) no Firestore
         if (arquivo) {
-            imagem = await enviarImagem(arquivo, nome);
+            imagem = await enviarImagem(arquivo);
+            botaoSalvar.textContent = "Salvando...";
         }
 
         const dados = { nome, descricao, preco, categoria, ativo, imagem };
@@ -216,11 +224,6 @@ async function salvarProduto() {
         if (estado.editandoId) {
             await atualizarProduto(estado.editandoId, dados);
             mostrarToast("Produto atualizado com sucesso.");
-
-            // Remove a imagem antiga do Storage (se foi substituída)
-            if (arquivo && estado.imagemAtual && estado.imagemAtual !== imagem) {
-                excluirImagem(estado.imagemAtual);
-            }
         } else {
             await criarProduto(dados);
             mostrarToast("Produto criado com sucesso.");
@@ -233,7 +236,8 @@ async function salvarProduto() {
         mostrarToast("Não foi possível salvar o produto. Tente novamente.", "erro");
     } finally {
         estado.enviando = false;
-        obterElemento("botao-salvar").disabled = false;
+        botaoSalvar.disabled = false;
+        botaoSalvar.textContent = estado.editandoId ? "Salvar Alterações" : "Salvar Produto";
     }
 }
 

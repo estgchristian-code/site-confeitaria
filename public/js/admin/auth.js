@@ -19,9 +19,13 @@ export function observarSessao(callback) {
     return onAuthStateChanged(auth, callback);
 }
 
-// Redireciona para outra página do painel
+// Redireciona para outra página do painel. O destino é resolvido relativo ao
+// diretório da página atual, funcionando com o prefixo "/public" do ambiente
+// local (Live Server) e com o site na raiz em produção (Vercel).
 export function redirecionarPara(caminho) {
-    window.location.replace(caminho);
+    const diretorioAtual = location.pathname.substring(0, location.pathname.lastIndexOf("/") + 1);
+    const nomeArquivo = caminho.split("/").pop();
+    window.location.replace(diretorioAtual + nomeArquivo);
 }
 
 // Usuário autenticado no momento (ou null)

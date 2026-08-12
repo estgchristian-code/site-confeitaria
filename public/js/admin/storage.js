@@ -1,33 +1,14 @@
 // ==========================================================================
-// STORAGE — ENVIO E REMOÇÃO DE IMAGENS
+// STORAGE — REMOÇÃO DE IMAGENS LEGADAS DO FIREBASE STORAGE
 // ==========================================================================
 
-import { storage, ref, uploadBytes, getDownloadURL, deleteObject } from "./firebase.js";
+import { storage, ref, deleteObject } from "./firebase.js";
 
-// Sanitiza o nome do arquivo para uso seguro no caminho do Storage
-function nomeSeguro(nome) {
-    return String(nome || "imagem")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-zA-Z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .toLowerCase() || "imagem";
-}
-
-// Envia a imagem para o Firebase Storage e devolve a URL pública
-export async function enviarImagem(arquivo, nomeProduto) {
-    const extensao = (arquivo.name.split(".").pop() || "png").toLowerCase();
-    const caminho = `produtos/${Date.now()}-${nomeSeguro(nomeProduto)}.${extensao}`;
-    const imagemRef = ref(storage, caminho);
-
-    await uploadBytes(imagemRef, arquivo);
-
-    return getDownloadURL(imagemRef);
-}
-
-// Remove a imagem do Storage (ignora falhas quando o arquivo não existe)
+// Remove a imagem do Firebase Storage (apenas URLs legadas do Firebase).
+// URLs do Cloudinary não são enviadas para o Storage.
 export async function excluirImagem(url) {
     if (!url || !/^https?:\/\//i.test(url)) return;
+    if (!/firebasestorage\.googleapis\.com/i.test(url)) return;
 
     try {
         await deleteObject(ref(storage, url));
