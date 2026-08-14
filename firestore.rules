@@ -1,0 +1,43 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // E-mail único com permissão administrativa (mesmo valor de
+    // public/js/admin/auth.js — manter em sincronia)
+    function isAdministrador() {
+      return request.auth != null
+        && request.auth.token.email == 'norskeconfeitaria@gmail.com';
+    }
+
+    // Valida os dados gravados: tipos corretos e limites de tamanho
+    // (mesmos limites de public/js/admin/products.js — manter em sincronia)
+    function dadosValidos() {
+      let dados = request.resource.data;
+      return (!('nome' in dados)
+              || (dados.nome is string && dados.nome.size() <= 100))
+          && (!('descricao' in dados)
+              || (dados.descricao is string && dados.descricao.size() <= 500))
+          && (!('categoria' in dados)
+              || (dados.categoria is string && dados.categoria.size() <= 50))
+          && (!('imagem' in dados)
+              || (dados.imagem is string && dados.imagem.size() <= 500))
+          && (!('preco' in dados) || dados.preco is number)
+          && (!('ativo' in dados) || dados.ativo is bool);
+    }
+
+    // Padrão: nega tudo que não for explicitamente liberado abaixo
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Coleção "produtos" (cardápio + painel)
+    match /produtos/{produtoId} {
+      // Leitura pública: o cardápio exibe os produtos sem login
+      allow read: if true;
+
+      // Escrita (criar, editar, alterar status, excluir) somente do admin
+      allow create, update, delete: if isAdministrador() && dadosValidos();
+    }
+  }
+}

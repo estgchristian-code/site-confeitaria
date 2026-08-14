@@ -50,13 +50,15 @@ formulario.addEventListener("submit", async evento => {
     } catch (erro) {
         console.error("Falha no login:", erro);
 
+        // Mensagens genéricas: não revela se o e-mail existe ou a senha está
+        // errada (evita enumeração de contas por um atacante)
         const mensagens = {
-            "auth/invalid-email": "E-mail inválido.",
-            "auth/user-disabled": "Este usuário está desativado.",
-            "auth/user-not-found": "Usuário não encontrado.",
-            "auth/wrong-password": "Senha incorreta.",
-            "auth/invalid-credential": "E-mail ou senha incorretos.",
-            "auth/too-many-requests": "Muitas tentativas. Aguarde e tente novamente."
+            "auth/invalid-email": "E-mail ou senha inválidos.",
+            "auth/user-disabled": "E-mail ou senha inválidos.",
+            "auth/user-not-found": "E-mail ou senha inválidos.",
+            "auth/wrong-password": "E-mail ou senha inválidos.",
+            "auth/invalid-credential": "E-mail ou senha inválidos.",
+            "auth/too-many-requests": "Muitas tentativas. Aguarde alguns minutos e tente novamente."
         };
 
         campoErro.textContent =

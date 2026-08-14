@@ -6,6 +6,15 @@ import { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "./fi
 
 const COLECAO = "produtos";
 
+// Limites de tamanho para os campos de texto (mesmos limites das regras
+// do Firestore — manter em sincronia com firestore.rules)
+const LIMITES = {
+    nome: 100,
+    descricao: 500,
+    categoria: 50,
+    imagem: 500
+};
+
 // Lista todos os produtos (independente do status)
 export async function listarProdutos() {
     const consulta = await getDocs(collection(db, COLECAO));
@@ -42,14 +51,22 @@ export async function excluirProduto(id) {
     return deleteDoc(doc(db, COLECAO, id));
 }
 
-// Padroniza os dados vindos do formulário
+// Padroniza e valida os dados vindos do formulário. Campos de texto são
+// limitados em tamanho e convertidos em string; preço vira número
+// não-negativo; nada é interpretado como HTML (evita XSS).
 function normalizarDados({ nome, descricao, preco, categoria, imagem, ativo }) {
+    const texto = (valor, limite) => String(valor || "").trim().slice(0, limite);
+
+    const precoNumero = Number(preco);
+    const precoNormalizado =
+        Number.isFinite(precoNumero) && precoNumero >= 0 ? precoNumero : 0;
+
     return {
-        nome: String(nome || "").trim(),
-        descricao: String(descricao || "").trim(),
-        preco: Number(preco) || 0,
-        categoria: String(categoria || "").trim(),
-        imagem: String(imagem || ""),
+        nome: texto(nome, LIMITES.nome),
+        descricao: texto(descricao, LIMITES.descricao),
+        preco: precoNormalizado,
+        categoria: texto(categoria, LIMITES.categoria),
+        imagem: String(imagem || "").slice(0, LIMITES.imagem),
         ativo: Boolean(ativo)
     };
 }

@@ -73,6 +73,8 @@ async function carregarProdutos() {
     }
 }
 
+// Monta a lista com criação de nós e textContent (evita XSS: dados do
+// Firestore são tratados como texto, nunca como HTML)
 function desenharLista() {
     const container = obterElemento("lista-produtos");
     if (!container) return;
@@ -84,16 +86,15 @@ function desenharLista() {
         produto.categoria.toLowerCase().includes(filtro)
     );
 
-    container.innerHTML = "";
+    container.replaceChildren();
 
     if (visiveis.length === 0) {
-        container.innerHTML = `
-            <div class="sem-produtos">
-                ${estado.produtos.length === 0
-                    ? "Nenhum produto cadastrado. Clique em \"+ Novo Produto\" para começar."
-                    : "Nenhum produto encontrado para a pesquisa."}
-            </div>
-        `;
+        const aviso = document.createElement("div");
+        aviso.className = "sem-produtos";
+        aviso.textContent = estado.produtos.length === 0
+            ? 'Nenhum produto cadastrado. Clique em "+ Novo Produto" para começar.'
+            : "Nenhum produto encontrado para a pesquisa.";
+        container.appendChild(aviso);
         return;
     }
 
@@ -103,25 +104,53 @@ function desenharLista() {
         const item = document.createElement("article");
         item.className = `item-produto${produto.ativo ? "" : " inativo"}`;
 
-        item.innerHTML = `
-            <img class="miniatura" src="${resolverImagem(produto.imagem)}"
-                 alt="${produto.nome}" loading="lazy">
-            <div class="info-produto">
-                <strong class="nome-produto">${produto.nome}</strong>
-                <span class="categoria-produto">${produto.categoria || "Sem categoria"}</span>
-            </div>
-            <span class="preco-produto">${formatarPreco(produto.preco)}</span>
-            <button class="botao-status ${produto.ativo ? "ativo" : "inativo"}"
-                    data-acao="status" data-id="${produto.id}"
-                    aria-pressed="${produto.ativo ? "true" : "false"}">
-                ${produto.ativo ? "Ativo" : "Inativo"}
-            </button>
-            <div class="acoes-produto">
-                <button class="btn-acoes btn-editar" data-acao="editar" data-id="${produto.id}">Editar</button>
-                <button class="btn-acoes btn-excluir" data-acao="excluir" data-id="${produto.id}">Excluir</button>
-            </div>
-        `;
+        const miniatura = document.createElement("img");
+        miniatura.className = "miniatura";
+        miniatura.src = resolverImagem(produto.imagem);
+        miniatura.alt = produto.nome;
+        miniatura.loading = "lazy";
 
+        const info = document.createElement("div");
+        info.className = "info-produto";
+
+        const nome = document.createElement("strong");
+        nome.className = "nome-produto";
+        nome.textContent = produto.nome;
+
+        const categoria = document.createElement("span");
+        categoria.className = "categoria-produto";
+        categoria.textContent = produto.categoria || "Sem categoria";
+
+        info.append(nome, categoria);
+
+        const preco = document.createElement("span");
+        preco.className = "preco-produto";
+        preco.textContent = formatarPreco(produto.preco);
+
+        const botaoStatus = document.createElement("button");
+        botaoStatus.className = `botao-status ${produto.ativo ? "ativo" : "inativo"}`;
+        botaoStatus.dataset.acao = "status";
+        botaoStatus.dataset.id = produto.id;
+        botaoStatus.setAttribute("aria-pressed", String(produto.ativo));
+        botaoStatus.textContent = produto.ativo ? "Ativo" : "Inativo";
+
+        const acoes = document.createElement("div");
+        acoes.className = "acoes-produto";
+
+        const botaoEditar = document.createElement("button");
+        botaoEditar.className = "btn-acoes btn-editar";
+        botaoEditar.dataset.acao = "editar";
+        botaoEditar.dataset.id = produto.id;
+        botaoEditar.textContent = "Editar";
+
+        const botaoExcluir = document.createElement("button");
+        botaoExcluir.className = "btn-acoes btn-excluir";
+        botaoExcluir.dataset.acao = "excluir";
+        botaoExcluir.dataset.id = produto.id;
+        botaoExcluir.textContent = "Excluir";
+
+        acoes.append(botaoEditar, botaoExcluir);
+        item.append(miniatura, info, preco, botaoStatus, acoes);
         fragmento.appendChild(item);
     });
 

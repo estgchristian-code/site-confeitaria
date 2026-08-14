@@ -120,28 +120,46 @@ function formatarPreco(valor) {
 const numeroWhats = "5541997373544"; // Número oficial da Confeitaria Norske!
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-// Função que desenha os produtos na tela
+// Função que desenha os produtos na tela (usa criação de nós com textContent
+// para evitar XSS — dados do Firestore são tratados como texto, nunca HTML)
 function renderizarProdutos(listaDeProdutos, idDoContainer) {
     const container = document.getElementById(idDoContainer);
-    
+
     if (!container || listaDeProdutos.length === 0) return;
 
     listaDeProdutos.forEach(produto => {
-        const cardHTML = `
-            <div class="card-produto">
-                <img src="${produto.imagem}" alt="${produto.nome}" class="img-produto" loading="lazy">
-                <div class="detalhes-produto">
-                    <h3>${produto.nome}</h3>
-                    <p class="descricao">${produto.descricao}</p>
-                    <p class="preco">${produto.preco}</p>
-                    <button class="btn-whatsapp" data-nome="${produto.nome}" data-preco="${produto.preco}">
-                        + Adicionar
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        container.innerHTML += cardHTML;
+        const card = document.createElement("div");
+        card.className = "card-produto";
+
+        const img = document.createElement("img");
+        img.src = produto.imagem;
+        img.alt = produto.nome;
+        img.className = "img-produto";
+        img.loading = "lazy";
+
+        const detalhes = document.createElement("div");
+        detalhes.className = "detalhes-produto";
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = produto.nome;
+
+        const descricao = document.createElement("p");
+        descricao.className = "descricao";
+        descricao.textContent = produto.descricao;
+
+        const preco = document.createElement("p");
+        preco.className = "preco";
+        preco.textContent = produto.preco;
+
+        const botao = document.createElement("button");
+        botao.className = "btn-whatsapp";
+        botao.dataset.nome = produto.nome;
+        botao.dataset.preco = produto.preco;
+        botao.textContent = "+ Adicionar";
+
+        detalhes.append(titulo, descricao, preco, botao);
+        card.append(img, detalhes);
+        container.appendChild(card);
     });
 }
 
@@ -221,22 +239,37 @@ function abrirModalCarrinho() {
     
     if (!modal || !containerItens || !valorTotalSpan) return;
 
-    containerItens.innerHTML = "";
+    // Limpa o conteúdo anterior com replaceChildren (sem innerHTML)
+    containerItens.replaceChildren();
     let totalGeral = 0;
-    
+
     carrinho.forEach(item => {
         const subtotal = item.preco * item.quantidade;
         totalGeral += subtotal;
-        
-        containerItens.innerHTML += `
-            <div class="item-lista-carrinho">
-                <span><strong>${item.quantidade}x</strong> ${item.nome}</span>
-                <div class="acoes-item-carrinho">
-                    <span>R$ ${subtotal.toFixed(2).replace(".", ",")}</span>
-                    <button class="btn-remover-item" data-nome="${item.nome}" title="Remover item">❌</button>
-                </div>
-            </div>
-        `;
+
+        const itemLinha = document.createElement("div");
+        itemLinha.className = "item-lista-carrinho";
+
+        const nome = document.createElement("span");
+        const quantidade = document.createElement("strong");
+        quantidade.textContent = `${item.quantidade}x`;
+        nome.append(quantidade, ` ${item.nome}`);
+
+        const acoes = document.createElement("div");
+        acoes.className = "acoes-item-carrinho";
+
+        const subtotalSpan = document.createElement("span");
+        subtotalSpan.textContent = `R$ ${subtotal.toFixed(2).replace(".", ",")}`;
+
+        const botaoRemover = document.createElement("button");
+        botaoRemover.className = "btn-remover-item";
+        botaoRemover.dataset.nome = item.nome;
+        botaoRemover.title = "Remover item";
+        botaoRemover.textContent = "❌";
+
+        acoes.append(subtotalSpan, botaoRemover);
+        itemLinha.append(nome, acoes);
+        containerItens.appendChild(itemLinha);
     });
     
     valorTotalSpan.innerText = `R$ ${totalGeral.toFixed(2).replace(".", ",")}`;

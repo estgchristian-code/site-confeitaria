@@ -35,6 +35,13 @@
         </div>
     </main>
 
+    <!-- Módulos do Firebase carregados com SRI (integridade) antes do app:
+         o navegador valida o hash antes de executar; os imports em js/firebase.js
+         e js/admin/firebase.js reaproveitam esses módulos do cache -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js" integrity="sha384-cQPXW6g1Q+ufIoLKhdHqAhDGQnJHGPkjxVTYRse5WU7e8rUvipDj8FZQLDmrJMCd" crossorigin="anonymous"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js" integrity="sha384-iDNCPBPRMJu73DmddbGniAvyZiCjwHuBaS2odQsF8pDIjgibbxLwLYixdLerH2VF" crossorigin="anonymous"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js" integrity="sha384-P+6TKSGOFnZl9R1uF2bFgd7/fbYx37MFMd6SeZiDsa8x4N5GBHQAyCuDD425wzzv" crossorigin="anonymous"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js" integrity="sha384-rYnu29WMSJm9R4KhEGiK/ynajmHroiBxxgAJ1sjrvGoFeBXo/4SUx/1CyLPZ22EN" crossorigin="anonymous"></script>
     <script type="module" src="../js/admin/login.js"></script>
 </body>
 </html>
