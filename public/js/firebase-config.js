@@ -5,7 +5,7 @@
 // Mantenha este arquivo centralizado: todas as integrações importam daqui.
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyACYd7IqIPhqoaN0S7Qy6oJsWKA3apbaig",
+    apiKey: "AIzaSyA8gU66c5npIpt2_0xaHZUWYQK2-gJY8JA",
     authDomain: "melhoria-norske.firebaseapp.com",
     projectId: "melhoria-norske",
     storageBucket: "melhoria-norske.firebasestorage.app",

@@ -2,7 +2,7 @@
 // LOGIN — ENTRADA DA PÁGINA DE LOGIN DO PAINEL
 // ==========================================================================
 
-import { entrar, observarSessao, redirecionarPara } from "./auth.js";
+import { entrar, sair, observarSessao, redirecionarPara, usuarioEhAdministrador } from "./auth.js";
 
 const formulario = document.getElementById("form-login");
 const campoEmail = document.getElementById("campo-email");
@@ -10,9 +10,14 @@ const campoSenha = document.getElementById("campo-senha");
 const campoErro = document.getElementById("erro-login");
 const botaoEntrar = document.getElementById("botao-entrar");
 
-// Quem já está autenticado vai direto para o painel
+// Sessão anterior encerrada por acesso negado (redirect vindo do painel)
+if (new URLSearchParams(window.location.search).get("acesso") === "negado") {
+    campoErro.textContent = "Acesso negado: esta conta não possui permissão para o painel.";
+}
+
+// Quem já está autenticado como administrador vai direto para o painel
 observarSessao(usuario => {
-    if (usuario) {
+    if (usuario && usuarioEhAdministrador(usuario)) {
         redirecionarPara("/admin/index.html");
     }
 });
@@ -33,7 +38,14 @@ formulario.addEventListener("submit", async evento => {
     botaoEntrar.textContent = "Entrando...";
 
     try {
-        await entrar(email, senha);
+        const credencial = await entrar(email, senha);
+
+        if (!usuarioEhAdministrador(credencial.user)) {
+            await sair();
+            campoErro.textContent = "Esta conta não possui acesso ao painel administrativo.";
+            return;
+        }
+
         redirecionarPara("/admin/index.html");
     } catch (erro) {
         console.error("Falha no login:", erro);

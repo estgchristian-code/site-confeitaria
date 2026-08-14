@@ -4,7 +4,7 @@
 // Carregado por /admin/index.html. Protege a página (redireciona para o
 // login quando não autenticado) e controla a interface do painel.
 
-import { observarSessao, sair, redirecionarPara, usuarioAtual } from "./auth.js";
+import { observarSessao, sair, redirecionarPara, usuarioEhAdministrador } from "./auth.js";
 import {
     listarProdutos,
     criarProduto,
@@ -379,6 +379,11 @@ function inicializarEventos() {
 observarSessao(usuario => {
     if (!usuario) {
         redirecionarPara("/admin/login.html");
+        return;
+    }
+
+    if (!usuarioEhAdministrador(usuario)) {
+        sair().finally(() => redirecionarPara("/admin/login.html?acesso=negado"));
         return;
     }
 

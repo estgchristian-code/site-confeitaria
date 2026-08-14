@@ -4,6 +4,14 @@
 
 import { auth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "./firebase.js";
 
+// E-mail único com permissão administrativa no painel
+export const ADMIN_EMAIL = "norskeconfeitaria@gmail.com";
+
+// Verifica se o usuário autenticado é o administrador do painel
+export function usuarioEhAdministrador(usuario) {
+    return Boolean(usuario && usuario.email === ADMIN_EMAIL);
+}
+
 // Login com e-mail e senha
 export async function entrar(email, senha) {
     return signInWithEmailAndPassword(auth, email, senha);
